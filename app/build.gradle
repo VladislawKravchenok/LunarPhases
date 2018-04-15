@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'io.fabric'
+def config = rootProject.extensions.getByName("ext")
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
+}
+android {
+    compileSdkVersion  config["targetSdkVersion"]
+    defaultConfig {
+        applicationId "com.universe.vladiviva5991gmail.moons"
+        minSdkVersion config["minSdkVersion"]
+        targetSdkVersion config["targetSdkVersion"]
+        versionCode config["versionCode"]
+        versionName config["versionName"]
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        debug {
+            storeFile file('../DevKey.jks')
+            storePassword '147963'
+            keyAlias 'keyAlias'
+            keyPassword '147852'
+        }
+       /* releas {
+            storeFile file('../DevKey.jks')
+            storePassword '147963'
+            keyAlias 'keyAlias'
+            keyPassword '147852'
+        }*/
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    def projectDependencies = rootProject.ext.projectDependencies
+    def developmentDependencies = rootProject.ext.developmentDependencies
+    implementation projectDependencies.kotlin
+    implementation projectDependencies.supportAppCompat
+    implementation projectDependencies.supportv4
+    implementation projectDependencies.supportDesign
+    implementation projectDependencies.rxJava
+    implementation projectDependencies.rxAndroid
+    implementation projectDependencies.rxPermission
+    implementation projectDependencies.gson
+    implementation projectDependencies.dagger
+    kapt projectDependencies.daggerCompiler
+    implementation projectDependencies.javaxInject
+    /*implementation projectDependencies.retrofit
+                        implementation projectDependencies.retrofitConverter
+                        implementation projectDependencies.retrofit2RxJava2
+
+                        implementation projectDependencies.archComponentExtention //чекнуть версию в док
+                        kapt projectDependencies.archComponentCompiler*/
+    kapt projectDependencies.dataBindingCompiler
+    //implementation projectDependencies.okHttp
+    //implementation projectDependencies.okHttpLoggining
+    //implementation projectDependencies.room //api
+    //kapt projectDependencies.roomCompiler
+    //implementation projectDependencies.roomRx
+    implementation projectDependencies.gmsLocation
+    implementation projectDependencies.gmsPlaces
+    implementation projectDependencies.constraintLayout
+    implementation developmentDependencies.leakCanary
+    /*implementation 'com.google.android.gms:play-services-location:12.0.1'
+                        implementation 'com.google.android.gms:play-services-places:12.0.1'*/
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+        transitive = true
+    }
+}

@@ -1,0 +1,69 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+    //Libraries
+    dataBindingVersion = '3.1.1'
+    rxJavaVersion = '2.1.10'
+    rxAndroidVersion = '2.0.2'
+    rxPermissionVersion = '0.9.5@aar'
+    gsonVersion = '2.8.2'
+    buildToolsSdkVersion = '27.1.1'
+    archComponentVersion = '1.0.0'
+    daggerVersion = '2.15'
+    javaxInjectVersion = '1'
+    retrofitVersion = '2.4.0'
+    okHttpVersion = '3.10.0'
+    gmsVersion = '12.0.1'
+    constraintLayoutVersion = '1.0.2'
+    //Development
+    leakCanaryVersion = '1.5.4'
+
+    projectDependencies = [
+            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlin_version}",
+
+            supportAppCompat      : "com.android.support:appcompat-v7:${buildToolsSdkVersion}",
+            supportv4             : "com.android.support:support-v4:${buildToolsSdkVersion}",
+            supportDesign         : "com.android.support:design:${buildToolsSdkVersion}",
+
+            gson                  : "com.google.code.gson:gson:${gsonVersion}",
+
+            rxJava                : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid             : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxPermission          : "com.tbruyelle.rxpermissions2:rxpermissions:${rxPermissionVersion}",
+
+            archComponentExtention: "android.arch.lifecycle:extensions:${archComponentVersion}",
+            archComponentCompiler : "android.arch.lifecycle:compiler:${archComponentVersion}",
+
+            dagger                : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            javaxInject           : "javax.inject:javax.inject:${javaxInjectVersion}",
+
+            dataBindingCompiler   : "com.android.databinding:compiler:${dataBindingVersion}",
+
+            retrofit              : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConverter     : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofit2RxJava2      : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+
+            okHttp                : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            okHttpLoggining       : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+
+            room                  : "android.arch.persistence.room:runtime:${archComponentVersion}",
+            roomCompiler          : "android.arch.persistence.room:compiler:${archComponentVersion}",
+            roomRx                : "android.arch.persistence.room:rxjava2:${archComponentVersion}",
+
+            gmsLocation           : "com.google.android.gms:play-services-location:${gmsVersion}",
+            gmsPlaces             : "com.google.android.gms:play-services-places:${gmsVersion}",
+
+            constraintLayout      : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}"
+    ]
+
+    developmentDependencies = [
+            leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+    ]
+
+
+}

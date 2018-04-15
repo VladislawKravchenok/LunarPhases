@@ -1,0 +1,23 @@
+.DS_Store
+/captures
+.externalNativeBuild
+
+# generated files
+bin/
+gen/
+build/
+/build
+
+# Android Studio
+.idea
+.gradle
+/*/local.properties
+/*/out
+/*/*/build
+build
+/*/*/production
+*.iml
+*.iws
+*.ipr
+*~
+*.swp
