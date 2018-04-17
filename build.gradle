@@ -29,16 +29,19 @@ buildscript {
 task load(dependsOn: "assembleRelease"){
     def groupName = "testapp"
     def releaseNotes = "Vava"
-    def task = tasks.create("crashlyticsUploadDistributionDevRelease")
+    def task = tasks.create("crashlyticsUploadDistributionRelease")
     task.ext.betaDistributionReleaseNotes = releaseNotes
     task.ext.betaDistributionGroupAliases = groupName
     task.execute()
 }
 
+
+
 allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://maven.fabric.io/public' }
     }
 }
 

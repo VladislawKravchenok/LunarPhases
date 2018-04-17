@@ -4,6 +4,7 @@ import android.app.Application
 import com.crashlytics.android.Crashlytics
 import com.squareup.leakcanary.LeakCanary
 import com.universe.vladiviva5991gmail.moons.BuildConfig
+import com.universe.vladiviva5991gmail.moons.mvp.location.LocationModul
 import io.fabric.sdk.android.Fabric
 
 class App : Application() {

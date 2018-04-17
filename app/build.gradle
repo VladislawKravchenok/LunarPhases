@@ -9,7 +9,7 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 android {
-    compileSdkVersion  config["targetSdkVersion"]
+    compileSdkVersion config["targetSdkVersion"]
     defaultConfig {
         applicationId "com.universe.vladiviva5991gmail.moons"
         minSdkVersion config["minSdkVersion"]
@@ -25,12 +25,12 @@ android {
             keyAlias 'keyAlias'
             keyPassword '147852'
         }
-       /* releas {
+        releas {
             storeFile file('../DevKey.jks')
             storePassword '147963'
             keyAlias 'keyAlias'
             keyPassword '147852'
-        }*/
+        }
     }
     buildTypes {
         debug {
@@ -39,13 +39,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.releas
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     dataBinding {
         enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -63,15 +67,15 @@ dependencies {
     implementation projectDependencies.dagger
     kapt projectDependencies.daggerCompiler
     implementation projectDependencies.javaxInject
-    /*implementation projectDependencies.retrofit
-                        implementation projectDependencies.retrofitConverter
-                        implementation projectDependencies.retrofit2RxJava2
+    implementation projectDependencies.retrofit
+    implementation projectDependencies.retrofitConverter
+    implementation projectDependencies.retrofit2RxJava2
 
-                        implementation projectDependencies.archComponentExtention //чекнуть версию в док
-                        kapt projectDependencies.archComponentCompiler*/
+    /*implementation projectDependencies.archComponentExtention //чекнуть версию в док
+    kapt projectDependencies.archComponentCompiler*/
     kapt projectDependencies.dataBindingCompiler
-    //implementation projectDependencies.okHttp
-    //implementation projectDependencies.okHttpLoggining
+    implementation projectDependencies.okHttp
+    implementation projectDependencies.okHttpLoggining
     //implementation projectDependencies.room //api
     //kapt projectDependencies.roomCompiler
     //implementation projectDependencies.roomRx
