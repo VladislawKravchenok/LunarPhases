@@ -9,29 +9,12 @@
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar"
+        app:titleTextColor="@color/colorMainBackground"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="30dp"
         android:background="@drawable/background_toolbar_translucent"
         app:layout_constraintTop_toTopOf="parent">
-<!--<ImageButton
-    android:layout_width=""
-    android:layout_height="" />-->
-        <!-- <RelativeLayout
-             android:id="@+id/bar_frame"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
-
-             <ImageView
-                 android:id="@+id/calendar_view"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_alignParentEnd="true"
-                 android:layout_alignParentTop="true"
-                 android:layout_marginEnd="30dp"
-                 android:src="@drawable/ic_calendar_bar" />
-         </RelativeLayout>-->
-
 
     </android.support.v7.widget.Toolbar>
     <!--    Latitude    -->

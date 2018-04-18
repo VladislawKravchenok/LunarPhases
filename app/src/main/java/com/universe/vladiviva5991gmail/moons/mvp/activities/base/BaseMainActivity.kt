@@ -25,11 +25,12 @@ abstract class BaseMainActivity<out Location : BaseLocation> : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        request.onStart()
+
     }
 
     override fun onResume() {
         super.onResume()
+        request.onStart()
     }
 
     override fun onPause() {
@@ -65,8 +66,8 @@ abstract class BaseMainActivity<out Location : BaseLocation> : BaseActivity() {
                 PackageManager.PERMISSION_DENIED -> {
                     Log.e("PermissionsResult", "PERMISSION_DENIED")
                     Toast.makeText(this@BaseMainActivity, "For correct information, we need to know your current location", Toast.LENGTH_LONG).show()
-                    latitude.text = AppConstants.GREENWICH_DEFOULT_COORDINATES_LATITUDE.toString()
-                    longitude.text = AppConstants.GREENWICH_DEFOULT_COORDINATES_LONGITUDE.toString()
+                    //latitude.text = AppConstants.GREENWICH_DEFOULT_COORDINATES_LATITUDE.toString()
+                    //longitude.text = AppConstants.GREENWICH_DEFOULT_COORDINATES_LONGITUDE.toString()
                 }
             }
         }

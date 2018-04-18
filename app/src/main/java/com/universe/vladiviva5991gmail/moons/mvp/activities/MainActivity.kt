@@ -1,25 +1,51 @@
 package com.universe.vladiviva5991gmail.moons.mvp.activities
 
 
+import android.app.DatePickerDialog
+import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.DatePicker
+import android.widget.Toast
 import com.universe.vladiviva5991gmail.moons.R
 import com.universe.vladiviva5991gmail.moons.mvp.activities.base.BaseMainActivity
 import com.universe.vladiviva5991gmail.moons.mvp.location.BaseLocation
 import com.universe.vladiviva5991gmail.moons.mvp.location.LocationRequest
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class MainActivity : BaseMainActivity<BaseLocation>() {
     override fun provideLocation()
             : BaseLocation = LocationRequest(applicationContext, this@MainActivity)
 
+    val calendar = Calendar.getInstance()
+
+    val dataSetListener = object: DatePickerDialog.OnDateSetListener{
+        override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            val myFormat = "yyyy-MM-dd"
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
+                Toast.makeText(this@MainActivity,sdf.format(calendar.time),Toast.LENGTH_LONG).show()
+            } else {
+                Log.e("SimpleDateFormat","your version android is low")
+            }
+
+
+
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
+
     }
 
 
@@ -58,6 +84,17 @@ class MainActivity : BaseMainActivity<BaseLocation>() {
      * который возвращает уникальный идентификатор пункта меню
      * (определенный атрибутом android:id из ресурса меню )*/
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        Log.e("click_on_icon_bar","calendar")
+        when(item?.itemId){
+            R.id.action_calendar -> {
+                Toast.makeText(this,"SHOW CALENDAR!",Toast.LENGTH_LONG).show()
+                DatePickerDialog(this@MainActivity,
+                        dataSetListener,
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)).show()
+            }
+        }
         return super.onOptionsItemSelected(item)
     }
 
