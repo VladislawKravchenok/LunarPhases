@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:background="#c15b5b"
+        android:background="#aa979ea4"
         app:layout_constraintBottom_toTopOf="@+id/main_lower_menu"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
@@ -35,7 +35,7 @@
             android:id="@+id/moon_phase_representation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#c9071d" />
+            android:background="#aa979ea4" />
     </FrameLayout>
 
     <!--Кнопочки вперёд\назад и текстовая информация о луне-->

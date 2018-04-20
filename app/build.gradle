@@ -93,4 +93,9 @@ dependencies {
     implementation('com.github.worker8:tourguide:1.0.19-SNAPSHOT@aar') {
         transitive = true
     }
+
+
+    //test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

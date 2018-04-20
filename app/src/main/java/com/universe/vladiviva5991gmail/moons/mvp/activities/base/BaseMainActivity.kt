@@ -1,12 +1,16 @@
 package com.universe.vladiviva5991gmail.moons.mvp.activities.base
 
+import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.universe.vladiviva5991gmail.moons.R
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants
 import com.universe.vladiviva5991gmail.moons.mvp.location.BaseLocation
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 
 abstract class BaseMainActivity<out Location : BaseLocation> : BaseActivity() {
@@ -19,12 +23,27 @@ abstract class BaseMainActivity<out Location : BaseLocation> : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         request = provideLocation()
+        //adb shell monkey -p com.universe.vla diviva5991gmail.moons -v 5000
 
+        /**
+         * запросить разрешение с RxPermission*/
+        /*RxPermissions(this)
+                .request(Manifest.permission.ACCESS_FINE_LOCATION)
+                .subscribe(object : Observer<Boolean> {
+                    override fun onComplete() {}
 
-    }
+                    override fun onSubscribe(d: Disposable) {}
 
-    override fun onStart() {
-        super.onStart()
+                    override fun onNext(t: Boolean) {
+                        if (t) {//granted
+
+                        } else {
+                            //нет разрешение - выводим диалог
+                        }
+                    }
+
+                    override fun onError(e: Throwable) {}
+                })*/
 
     }
 
@@ -33,21 +52,10 @@ abstract class BaseMainActivity<out Location : BaseLocation> : BaseActivity() {
         request.onStart()
     }
 
-    override fun onPause() {
-        super.onPause()
-    }
 
     override fun onStop() {
         super.onStop()
         request.onStop()
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     /**
@@ -72,8 +80,6 @@ abstract class BaseMainActivity<out Location : BaseLocation> : BaseActivity() {
             }
         }
     }
-
-
 
 
 }

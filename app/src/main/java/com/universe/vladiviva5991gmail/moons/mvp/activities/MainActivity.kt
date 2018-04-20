@@ -52,7 +52,7 @@ class MainActivity : BaseMainActivity<BaseLocation>() {
         val tourGuide = TourGuide.init(this).with(TourGuide.Technique.CLICK)
                 .setPointer(Pointer())
                 .setToolTip(ToolTip().setGravity(Gravity.TOP).setShadow(true).setTitle("Текст!").setDescription("Кликни на него, чтобы продолжить"))
-                .setOverlay(Overlay().setBackgroundColor(Color.parseColor("#AAFF0000")))
+                .setOverlay(Overlay().setBackgroundColor(Color.parseColor("#aa979ea4")))
                 .playOn(coordinates)
         coordinates.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
@@ -60,7 +60,7 @@ class MainActivity : BaseMainActivity<BaseLocation>() {
                 val tourGuide1 = TourGuide.init(this@MainActivity).with(TourGuide.Technique.CLICK)
                         .setPointer(Pointer())
                         .setToolTip(ToolTip().setGravity(Gravity.TOP).setShadow(true).setTitle("Кнопка!"))
-                        .setOverlay(Overlay().setBackgroundColor(Color.parseColor("#AAFF0000")))
+                        .setOverlay(Overlay().setBackgroundColor(Color.parseColor("#aa979ea4")))
                         .playOn(next_day)
                 next_day.setOnClickListener(object : View.OnClickListener {
                     override fun onClick(v: View?) {
@@ -69,12 +69,23 @@ class MainActivity : BaseMainActivity<BaseLocation>() {
                         val tourGuide2 = TourGuide.init(this@MainActivity).with(TourGuide.Technique.CLICK)
                                 .setPointer(Pointer())
                                 .setToolTip(ToolTip().setGravity(Gravity.TOP).setShadow(true).setTitle("Ещё одна Кнопка!"))
-                                .setOverlay(Overlay().setBackgroundColor(Color.parseColor("#AAFF0000")))
+                                .setOverlay(Overlay().setBackgroundColor(Color.parseColor("#aa979ea4")))
                                 .playOn(previous_day)
                         previous_day.setOnClickListener(object : View.OnClickListener {
                             override fun onClick(v: View?) {
                                 previous_day.startAnimation(animation)
                                 tourGuide2.cleanUp()
+                                next_day.setOnClickListener(object : View.OnClickListener {
+                                    override fun onClick(v: View?) {
+                                        next_day.startAnimation(animation)
+                                    }
+                                })
+                                previous_day.setOnClickListener(object : View.OnClickListener {
+                                    override fun onClick(v: View?) {
+                                        previous_day.startAnimation(animation)
+
+                                    }
+                                })
                             }
                         })
                     }

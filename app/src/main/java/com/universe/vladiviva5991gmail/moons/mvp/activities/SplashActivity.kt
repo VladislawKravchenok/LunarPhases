@@ -17,4 +17,5 @@ class SplashActivity: BaseSplashActivity<BasePresenter>() {
         startActivity(intent)
         finish()
     }
+
 }

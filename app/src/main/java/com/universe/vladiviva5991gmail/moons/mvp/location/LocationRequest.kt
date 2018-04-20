@@ -17,10 +17,13 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants
 import com.universe.vladiviva5991gmail.moons.mvp.activities.MainActivity
 import com.universe.vladiviva5991gmail.moons.mvp.location.LocationVariables.latitude
 import com.universe.vladiviva5991gmail.moons.mvp.location.LocationVariables.longtude
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 import javax.inject.Singleton
 
 /**
@@ -99,7 +102,7 @@ constructor(
                 (location.longitude).toString()
         latitude = location.latitude.toFloat()
         longtude = location.longitude.toFloat()
-        //Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
 
     }
 
@@ -133,11 +136,12 @@ constructor(
     }
 
     private fun checkPermission(): Boolean {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return true
-        }
-        return false
+         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                 && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+             return true
+         }
+         return false
+
     }
 
 
@@ -163,15 +167,15 @@ constructor(
     }
 
     private fun showAlert() {
-       /* Log.e(TAG, "showAlert()")
-        val dialog = AlertDialog.Builder(activity)
-        dialog.setTitle("Enable Location")
-                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " + "use this app")
-                .setPositiveButton("Location Settings") { paramDialogInterface, paramInt ->
-                    val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                    startActivity(myIntent)
-                }
-                .setNegativeButton("Cancel") { paramDialogInterface, paramInt -> }
-        dialog.show()*/
+        /* Log.e(TAG, "showAlert()")
+         val dialog = AlertDialog.Builder(activity)
+         dialog.setTitle("Enable Location")
+                 .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " + "use this app")
+                 .setPositiveButton("Location Settings") { paramDialogInterface, paramInt ->
+                     val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                     startActivity(myIntent)
+                 }
+                 .setNegativeButton("Cancel") { paramDialogInterface, paramInt -> }
+         dialog.show()*/
     }
 }
