@@ -1,0 +1,44 @@
+package com.universe.vladiviva5991gmail.moons.mvp.activities.calculations
+
+import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.SYNODIC_MONTH
+import javax.inject.Singleton
+//TODO 1) дописать методы для расчета восхода/захода 2)Дополнить формулы, для более точного расчета
+
+@Singleton
+class MoonPhase {
+
+    companion object {
+
+        @JvmStatic
+        fun getLunarNumber(year: Int): Int {
+            //TODO UnitTest
+            val startPoint = 2000
+            var startPointNumber = 6
+
+            var result = startPointNumber
+
+            if (startPoint == year) {
+                return startPointNumber
+            } else if (startPoint < year) {
+                result += year - startPoint
+            } else if (startPoint > year) {
+                result += startPoint - year
+            }
+
+            while (result > 19) {
+                result -= 19
+            }
+            return result
+        }
+
+        @JvmStatic
+        fun getMoonAge(lunarNumber: Int, dayOfMonth: Int, monthInYear: Int): Float {
+            //TODO Может быть погрешность в ~1 сутки
+            val result = (lunarNumber * 11) - 14 + dayOfMonth + monthInYear
+            return result % SYNODIC_MONTH
+        }
+    }
+
+
+}
+

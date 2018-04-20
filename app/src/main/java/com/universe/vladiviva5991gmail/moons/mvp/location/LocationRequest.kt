@@ -99,7 +99,7 @@ constructor(
                 (location.longitude).toString()
         latitude = location.latitude.toFloat()
         longtude = location.longitude.toFloat()
-        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
 
     }
 

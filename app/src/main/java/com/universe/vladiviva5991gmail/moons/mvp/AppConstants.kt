@@ -9,5 +9,8 @@ class AppConstants {
          * if the user does not approve the request for his location*/
         const val GREENWICH_DEFOULT_COORDINATES_LATITUDE: Float = 51.476852F
         const val GREENWICH_DEFOULT_COORDINATES_LONGITUDE: Float = -0.000500F
+
+
+        const val SYNODIC_MONTH: Float = 29.53058868F
     }
 }

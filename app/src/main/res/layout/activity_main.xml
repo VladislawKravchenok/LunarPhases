@@ -6,29 +6,107 @@
     android:layout_height="match_parent"
     android:background="@color/colorMainBackground">
 
+    <!--Тулбарчик с моей конфигурацией-->
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar"
-        app:titleTextColor="@color/colorMainBackground"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="30dp"
         android:background="@drawable/background_toolbar_translucent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/colorMainBackground">
 
     </android.support.v7.widget.Toolbar>
-    <!--    Latitude    -->
-    <TextView
-        android:id="@+id/latitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         />
-    <!--    Longitude    -->
-    <TextView
-        android:id="@+id/longitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
+
+    <!--Фаза луны в виде картинки собснай персоной-->
+    <FrameLayout
+        android:id="@+id/moon_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#c15b5b"
+        app:layout_constraintBottom_toTopOf="@+id/main_lower_menu"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/moon_phase_representation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#c9071d" />
+    </FrameLayout>
+
+    <!--Кнопочки вперёд\назад и текстовая информация о луне-->
+    <LinearLayout
+        android:id="@+id/main_lower_menu"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/previous_day"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            android:background="@color/colorMainBackground"
+            android:src="@drawable/ic_previous_day" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_weight="8"
+            android:background="@drawable/info_border"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/coordinates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/coordinates"
+                    android:textColor="@color/infoHeaders"
+                    android:textSize="12sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <TextView
+                        android:id="@+id/latitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/infoTextColor"
+                        android:textSize="12sp"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/longitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/infoTextColor"
+                        android:textSize="12sp"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/next_day"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            android:background="@color/colorMainBackground"
+            android:src="@drawable/ic_next_day" />
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>
