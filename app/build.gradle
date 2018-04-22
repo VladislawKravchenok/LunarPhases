@@ -65,6 +65,7 @@ dependencies {
     implementation projectDependencies.rxJava
     implementation projectDependencies.rxAndroid
     implementation projectDependencies.rxPermission
+    implementation projectDependencies.rxBinding
     implementation projectDependencies.gson
     implementation projectDependencies.dagger
     kapt projectDependencies.daggerCompiler
@@ -85,8 +86,6 @@ dependencies {
     implementation projectDependencies.gmsPlaces
     implementation projectDependencies.constraintLayout
     implementation developmentDependencies.leakCanary
-    /*implementation 'com.google.android.gms:play-services-location:12.0.1'
-                        implementation 'com.google.android.gms:play-services-places:12.0.1'*/
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
         transitive = true
     }

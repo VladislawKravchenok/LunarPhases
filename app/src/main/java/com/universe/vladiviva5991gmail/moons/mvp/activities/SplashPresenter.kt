@@ -5,11 +5,12 @@ import com.universe.vladiviva5991gmail.moons.domain.entity.MoonEntity
 import com.universe.vladiviva5991gmail.moons.domain.usecase.GetMoon
 import com.universe.vladiviva5991gmail.moons.mvp.App
 import com.universe.vladiviva5991gmail.moons.mvp.activities.base.BasePresenter
+import com.universe.vladiviva5991gmail.moons.mvp.activities.base.Router
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class SplashPresenter : BasePresenter() {
+class SplashPresenter : InterSplashPresenter() {
     override fun createInject() {
         App.appComponent.inject(this)
     }
@@ -18,6 +19,7 @@ class SplashPresenter : BasePresenter() {
     lateinit var getMoon: GetMoon
 
     init{
+        createInject()
         getMoon.get().subscribe(object: Observer<MoonEntity>{
             override fun onComplete() {}
 

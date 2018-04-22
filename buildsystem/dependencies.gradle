@@ -6,10 +6,11 @@ allprojects {
 
 ext {
     //Libraries
-    dataBindingVersion = '3.0.1'
+    dataBindingVersion = '3.1.1'
     rxJavaVersion = '2.1.10'
     rxAndroidVersion = '2.0.2'
     rxPermissionVersion = '0.9.5@aar'
+    rxBindingVersion = '2.1.1'
     gsonVersion = '2.8.2'
     buildToolsSdkVersion = '27.1.1'
     archComponentVersion = '1.0.0'
@@ -24,7 +25,6 @@ ext {
 
     projectDependencies = [
             kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlin_version}",
-
             supportAppCompat      : "com.android.support:appcompat-v7:${buildToolsSdkVersion}",
             supportv4             : "com.android.support:support-v4:${buildToolsSdkVersion}",
             supportDesign         : "com.android.support:design:${buildToolsSdkVersion}",
@@ -34,6 +34,7 @@ ext {
             rxJava                : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid             : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             rxPermission          : "com.tbruyelle.rxpermissions2:rxpermissions:${rxPermissionVersion}",
+            rxBinding             : "com.jakewharton.rxbinding2:rxbinding:${rxBindingVersion}",
 
             archComponentExtention: "android.arch.lifecycle:extensions:${archComponentVersion}",
             archComponentCompiler : "android.arch.lifecycle:compiler:${archComponentVersion}",

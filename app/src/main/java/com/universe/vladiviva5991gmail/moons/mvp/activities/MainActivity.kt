@@ -2,116 +2,50 @@ package com.universe.vladiviva5991gmail.moons.mvp.activities
 
 
 import android.app.DatePickerDialog
-import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.DatePicker
 import android.widget.Toast
 import com.universe.vladiviva5991gmail.moons.R
 import com.universe.vladiviva5991gmail.moons.mvp.activities.base.BaseMainActivity
+import com.universe.vladiviva5991gmail.moons.mvp.activities.base.BasePresenter
+import com.universe.vladiviva5991gmail.moons.mvp.activities.base.Router
 import com.universe.vladiviva5991gmail.moons.mvp.location.BaseLocation
-import com.universe.vladiviva5991gmail.moons.mvp.location.LocationRequest
+import com.universe.vladiviva5991gmail.moons.mvp.location.LocRequest
 import kotlinx.android.synthetic.main.activity_main.*
-import tourguide.tourguide.Overlay
-import tourguide.tourguide.Pointer
-import tourguide.tourguide.ToolTip
-import tourguide.tourguide.TourGuide
 import java.util.*
 
 
-class MainActivity : BaseMainActivity<BaseLocation>() {
-    override fun provideLocation()
-            : BaseLocation = LocationRequest(applicationContext, this@MainActivity)
+class MainActivity
+    : BaseMainActivity
+        <BaseLocation,
+        BasePresenter<Router>,
+        Router>() {
 
+    override fun provideLocation(): BaseLocation = LocRequest(applicationContext, this@MainActivity)
+    override fun providePresenter(): BasePresenter<Router> = MainPresenter()
+    override fun provideRouter(): Router = MainRouter(this@MainActivity)
 
-    val calendar = Calendar.getInstance()
-
+    private val calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
-
-        //TODO УБРАТЬ АПАСЛЯ ЭТОТ УЖАС
-        helpOnStart()
-
-
-    }
-
-    fun helpOnStart() {
-        //TODO Вынести в presentation и назначать клик через роутер
+        //supportActionBar?.setDisplayShowTitleEnabled(true)
+       /* //TODO УБРАТЬ АПАСЛЯ ЭТОТ УЖАС
         val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.anim_button)
-        next_day.animation = animation
-        val tourGuide = TourGuide.init(this).with(TourGuide.Technique.CLICK)
-                .setPointer(Pointer())
-                .setToolTip(ToolTip().setGravity(Gravity.TOP).setShadow(true).setTitle("Текст!").setDescription("Кликни на него, чтобы продолжить"))
-                .setOverlay(Overlay().setBackgroundColor(Color.parseColor("#aa979ea4")))
-                .playOn(coordinates)
-        coordinates.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                tourGuide.cleanUp()
-                val tourGuide1 = TourGuide.init(this@MainActivity).with(TourGuide.Technique.CLICK)
-                        .setPointer(Pointer())
-                        .setToolTip(ToolTip().setGravity(Gravity.TOP).setShadow(true).setTitle("Кнопка!"))
-                        .setOverlay(Overlay().setBackgroundColor(Color.parseColor("#aa979ea4")))
-                        .playOn(next_day)
-                next_day.setOnClickListener(object : View.OnClickListener {
-                    override fun onClick(v: View?) {
-                        next_day.startAnimation(animation)
-                        tourGuide1.cleanUp()
-                        val tourGuide2 = TourGuide.init(this@MainActivity).with(TourGuide.Technique.CLICK)
-                                .setPointer(Pointer())
-                                .setToolTip(ToolTip().setGravity(Gravity.TOP).setShadow(true).setTitle("Ещё одна Кнопка!"))
-                                .setOverlay(Overlay().setBackgroundColor(Color.parseColor("#aa979ea4")))
-                                .playOn(previous_day)
-                        previous_day.setOnClickListener(object : View.OnClickListener {
-                            override fun onClick(v: View?) {
-                                previous_day.startAnimation(animation)
-                                tourGuide2.cleanUp()
-                                next_day.setOnClickListener(object : View.OnClickListener {
-                                    override fun onClick(v: View?) {
-                                        next_day.startAnimation(animation)
-                                    }
-                                })
-                                previous_day.setOnClickListener(object : View.OnClickListener {
-                                    override fun onClick(v: View?) {
-                                        previous_day.startAnimation(animation)
-
-                                    }
-                                })
-                            }
-                        })
-                    }
-                })
-            }
-        })
+        RxView.clicks(next_day)
+                .debounce(200,TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+                .subscribe { next_day.startAnimation(animation) }
+        RxView.clicks(previous_day)
+                .debounce(200,TimeUnit.MILLISECONDS,AndroidSchedulers.mainThread())
+                .subscribe { previous_day.startAnimation(animation) }*/
     }
 
-
-    /**
-     * Вызывается, когда ток Window активности получает или теряет фокус.
-     * */
-    /*override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            val decorView: View = window.decorView
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-            }
-        }
-    }*/
 
     /**
      *  В этом методе можно загрузить собственный ресурс меню
@@ -131,10 +65,8 @@ class MainActivity : BaseMainActivity<BaseLocation>() {
      * который возвращает уникальный идентификатор пункта меню
      * (определенный атрибутом android:id из ресурса меню )*/
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        Log.e("click_on_icon_bar", "calendar")
         when (item?.itemId) {
             R.id.action_calendar -> {
-                Toast.makeText(this, "SHOW CALENDAR!", Toast.LENGTH_LONG).show()
                 DatePickerDialog(this@MainActivity,
                         dataSetListener,
                         calendar.get(Calendar.YEAR),
@@ -146,22 +78,20 @@ class MainActivity : BaseMainActivity<BaseLocation>() {
     }
 
     //TODO Сделать покрасивее
-    val dataSetListener = object : DatePickerDialog.OnDateSetListener {
+    private val dataSetListener = object : DatePickerDialog.OnDateSetListener {
         override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
             val myFormat = "yyyy-MM-dd"
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
+
                 Toast.makeText(this@MainActivity, sdf.format(calendar.time), Toast.LENGTH_LONG).show()
             } else {
                 Log.e("SimpleDateFormat", "your version android is low")
             }
-
-
         }
     }
-
-
 }

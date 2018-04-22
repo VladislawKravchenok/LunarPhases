@@ -1,0 +1,83 @@
+package com.universe.vladiviva5991gmail.moons.mvp.activities.base
+
+import android.content.SharedPreferences
+import android.graphics.Color
+import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
+import android.view.View
+import com.universe.vladiviva5991gmail.moons.R
+import com.universe.vladiviva5991gmail.moons.R.id.action_calendar
+import kotlinx.android.synthetic.main.activity_main.*
+import tourguide.tourguide.Overlay
+import tourguide.tourguide.Pointer
+import tourguide.tourguide.ToolTip
+import tourguide.tourguide.TourGuide
+
+/**
+ * Промежуточное активити показывающее подсказки
+ *
+ * Нужен только при первом запуске приложения
+ *
+ * */
+abstract class BaseActivityGuide : BaseActivity() {
+
+    private lateinit var tourGuide: TourGuide
+    private lateinit var prefs: SharedPreferences
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        prefs = this.getSharedPreferences("firstRun", android.content.Context.MODE_PRIVATE)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //TODO Сделать проверку лишь однажды с помощью shared preference
+        if (prefs.getBoolean("firstrun", true)) {
+            prefs.edit().putBoolean("firstrun", false).apply()
+            informationSigns(
+                    info_table,
+                    "Инфо!",
+                    "Нажми в центр, чтобы продолжить",
+                    1)
+            Log.e("AAAAA", "firstRun worked, see you in second run xD")
+        }
+    }
+
+    private fun informationSigns(view: View, title: String, description: String, total: Int) {
+        tourGuide = TourGuide.init(this@BaseActivityGuide).with(TourGuide.Technique.CLICK)
+                .setPointer(Pointer())
+                .setToolTip(ToolTip()
+                        .setGravity(Gravity.TOP)
+                        .setShadow(true)
+                        .setTitle(title)
+                        .setDescription(description))
+                .setOverlay(Overlay()
+                        .setBackgroundColor(Color.parseColor("#aa979ea4"))
+                        .setOnClickListener {
+                            tourGuide.cleanUp()
+                            when (total) {
+                                1 -> {
+                                    informationSigns(
+                                            toolbar,
+                                            "Кнопка!",
+                                            "Нажми в центр, чтобы продолжить",
+                                            2)
+                                }
+                                2 -> {
+                                    informationSigns(
+                                            previous_day,
+                                            "Ещё одна Кнопка!",
+                                            "Нажми в центр, чтобы продолжить",
+                                            3)
+                                }
+                                else -> {
+                                    Log.e("ААААА", "Краткий туториал закончен")
+                                }
+                            }
+
+                        })
+                .playOn(view)
+    }
+}

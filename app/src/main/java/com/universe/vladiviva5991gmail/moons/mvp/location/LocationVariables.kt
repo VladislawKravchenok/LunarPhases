@@ -1,6 +1,6 @@
 package com.universe.vladiviva5991gmail.moons.mvp.location
 
 object LocationVariables {
-    var latitude: Float? = null
-    var longtude: Float? = null
+    var latitude: Double? = null
+    var longtude: Double? = null
 }

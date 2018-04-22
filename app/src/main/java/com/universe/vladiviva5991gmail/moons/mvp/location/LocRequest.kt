@@ -1,16 +1,14 @@
 package com.universe.vladiviva5991gmail.moons.mvp.location
 
 import android.Manifest
-import android.content.ContentValues.TAG
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.common.ConnectionResult
@@ -18,12 +16,16 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.universe.vladiviva5991gmail.moons.mvp.AppConstants
+import com.universe.vladiviva5991gmail.moons.R
+import com.universe.vladiviva5991gmail.moons.R.color.infoTextColor
+import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.FASTEST_INTERVAL
+import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.UPDATE_INTERVAL
 import com.universe.vladiviva5991gmail.moons.mvp.activities.MainActivity
 import com.universe.vladiviva5991gmail.moons.mvp.location.LocationVariables.latitude
 import com.universe.vladiviva5991gmail.moons.mvp.location.LocationVariables.longtude
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Singleton
 
 /**
@@ -41,7 +43,7 @@ import javax.inject.Singleton
  *  чтобы узнать, когда автоматически управляемое соединение установлено или приостановлено.
  * */
 @Singleton
-class LocationRequest
+class LocRequest
 constructor(
         private val context: Context,
         private val activity: MainActivity
@@ -50,104 +52,106 @@ constructor(
         com.google.android.gms.location.LocationListener,
         BaseLocation() {
 
-
     private lateinit var location: Location
     private lateinit var locationRequest: LocationRequest
-    private val googleApiClient: GoogleApiClient
     private var locationManager: LocationManager
-
-    private val UPDATE_INTERVAL = (30 * 1000).toLong()  /* 30 secs */
-    private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
-    //private val NUM_UPDATE: Int = 1 /* just once */
+    private var googleApiClient: GoogleApiClient? = null
 
     init {
         requestLocation()
         googleApiClient = GoogleApiClient.Builder(activity)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
+                .addConnectionCallbacks(this@LocRequest)
+                .addOnConnectionFailedListener(this@LocRequest)
                 .addApi(LocationServices.API)
                 .build()
-
         locationManager = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         checkLocation() //проверяет включена ли служба определения местоположения в телефоне
+        googleApiClient?.connect()//подключается к api клиенту
     }
 
     override fun onStart() {
-
-        googleApiClient.connect()
+        googleApiClient?.connect()
     }
 
     override fun onStop() {
-        googleApiClient.disconnect()
+        if (googleApiClient!!.isConnected) {
+            googleApiClient?.disconnect()
+        }
     }
 
     override fun onConnected(p0: Bundle?) {
-        if (checkPermission()) {
-            return
-        }
+        if (checkPermission()) return
         startLocationUpdates()
-
         location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
-
         startLocationUpdates()
-
-        latitude = location.latitude.toFloat()
-        longtude = location.longitude.toFloat()
-
+        updateVariables(location)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onLocationChanged(location: Location) {
         val msg = "Updated Location: " +
                 (location.latitude).toString() + "," +
                 (location.longitude).toString()
-        latitude = location.latitude.toFloat()
-        longtude = location.longitude.toFloat()
+        updateVariables(location)
+        activity.latitude_longtude.setTextColor(Color.GREEN)
+        activity.latitude_longtude.text =
+                Location.convert(location.latitude, Location.FORMAT_SECONDS) +
+                "°с.ш " + Location.convert(location.longitude, Location.FORMAT_SECONDS) + "°в.д"
         Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
-
     }
 
-    //@SuppressLint("MissingPermission")
-    override fun startLocationUpdates() {
-        // Create the location request
+    private fun updateVariables(location: Location) {
+        latitude = location.latitude
+        longtude = location.longitude
+    }
+
+    private fun startLocationUpdates() {
         locationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL)
-                //.setNumUpdates(NUM_UPDATE)
                 .setFastestInterval(FASTEST_INTERVAL)
 
-        // Запрос обновления местоположения
         if (checkPermission()) {
             return
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,
-                locationRequest, this)
-    }
-
-
-    private fun requestLocation() {
-        if (checkPermission()) {
-            ActivityCompat.requestPermissions(activity,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
-                    AppConstants.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
-            Log.e("ACCESS_FINE_LOCATION", "not granted")
-        } else {
-            Log.e("ACCESS_FINE_LOCATION", "granted!")
+        if (googleApiClient != null) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,
+                    locationRequest, this)
         }
     }
 
-    private fun checkPermission(): Boolean {
-         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                 && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-             return true
-         }
-         return false
-
+    private fun requestLocation() {
+        RxPermissions(activity)
+                .request(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+                .subscribe(object : Observer<Boolean> {
+                    override fun onComplete() {}
+                    override fun onSubscribe(d: Disposable) {}
+                    override fun onError(e: Throwable) {}
+                    override fun onNext(t: Boolean) {
+                        if (t) {
+                            Log.e("requestLocation()", "granted!")
+                            startLocationUpdates()
+                        } else {
+                            Log.e("requestLocation()", "not granted")
+                            Toast.makeText(activity, "Нет информации о местоположении",
+                                    Toast.LENGTH_LONG).show()
+                            activity.applyDefaultCoordinates()
+                        }
+                    }
+                })
     }
 
+    private fun checkPermission(): Boolean {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return true
+        }
+        return false
+    }
 
     private fun checkLocation(): Boolean {
         if (!isLocationEnabled())
-            showAlert()
+            Toast.makeText(activity, "Местоположение не обнаружено.", Toast.LENGTH_SHORT).show()
         return isLocationEnabled()
     }
 
@@ -158,24 +162,11 @@ constructor(
     }
 
     override fun onConnectionSuspended(i: Int) {
-        Log.e(TAG, "Connection Suspended")
-        googleApiClient.connect()
+        Log.e("AAAAA", "Приостановлено")
+        googleApiClient!!.connect()
     }
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
-        Log.e(TAG, "Connection failed. Error: " + connectionResult.getErrorCode())
-    }
-
-    private fun showAlert() {
-        /* Log.e(TAG, "showAlert()")
-         val dialog = AlertDialog.Builder(activity)
-         dialog.setTitle("Enable Location")
-                 .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " + "use this app")
-                 .setPositiveButton("Location Settings") { paramDialogInterface, paramInt ->
-                     val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                     startActivity(myIntent)
-                 }
-                 .setNegativeButton("Cancel") { paramDialogInterface, paramInt -> }
-         dialog.show()*/
+        Log.e("AAAAA", "Подключение нарушено. Ошибка: " + connectionResult.errorCode)
     }
 }

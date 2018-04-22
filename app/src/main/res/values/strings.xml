@@ -1,5 +1,19 @@
 <resources>
     <string name="app_name">Moon\'s</string>
+
+    <!--MainActivity-->
     <string name="action_settings">Settings</string>
+    <string name="action_information">Information</string>
     <string name="coordinates">Координаты:</string>
+    <string name="moon_age">Возраст:</string>
+    <string name="phase">Фаза:</string>
+    <string name="expectation">Ожидание сигнала GPS | wifi</string>
+
+    <!--InfoAboutMoonActivity-->
+
+    <!--InfoAboutAppActivity-->
+
+
+
+
 </resources>

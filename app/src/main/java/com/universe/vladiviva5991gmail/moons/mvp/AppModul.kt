@@ -44,7 +44,6 @@ class AppModul constructor(private val context: Context) {
             .client(okHttpClient)
             .build()
 
-
     @Provides
     @Singleton
     fun getRestApi(retrofit: Retrofit): RestApi = retrofit.create(RestApi::class.java)
@@ -59,19 +58,11 @@ class AppModul constructor(private val context: Context) {
     fun getOkHttp(): OkHttpClient {
         val builder: OkHttpClient.Builder = OkHttpClient.Builder()
 
-
-        builder.readTimeout(5, TimeUnit.SECONDS) //время ожидания чего-то там
-                .writeTimeout(5, TimeUnit.SECONDS)
-                .connectTimeout(5, TimeUnit.SECONDS)
-
-        //.addInterceptor()//выполнить некие модификации?
         if (BuildConfig.DEBUG) {
-            val httpLogging: HttpLoggingInterceptor = HttpLoggingInterceptor()
-            httpLogging.setLevel(HttpLoggingInterceptor.Level.BODY)
+            val httpLogging = HttpLoggingInterceptor()
+            httpLogging.level = HttpLoggingInterceptor.Level.BODY
             builder.addInterceptor(httpLogging)
         }
-
         return builder.build()
-
     }
 }

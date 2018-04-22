@@ -1,50 +1,32 @@
 package com.universe.vladiviva5991gmail.moons.mvp.activities.base
 
-import android.Manifest
-import android.content.pm.PackageManager
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import com.tbruyelle.rxpermissions2.RxPermissions
-import com.universe.vladiviva5991gmail.moons.R
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants
 import com.universe.vladiviva5991gmail.moons.mvp.location.BaseLocation
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 
-abstract class BaseMainActivity<out Location : BaseLocation> : BaseActivity() {
+abstract
+class BaseMainActivity
+<out Location : BaseLocation, out Presenter : BasePresenter<Router>, out R : Router>
+    : BaseActivityGuide() {
 
     private lateinit var request: Location
+    private lateinit var presenter: Presenter
+    private lateinit var router: R
+
 
     abstract fun provideLocation(): Location
+    abstract fun providePresenter(): Presenter
+    abstract fun provideRouter(): R
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         request = provideLocation()
-        //adb shell monkey -p com.universe.vla diviva5991gmail.moons -v 5000
-
-        /**
-         * запросить разрешение с RxPermission*/
-        /*RxPermissions(this)
-                .request(Manifest.permission.ACCESS_FINE_LOCATION)
-                .subscribe(object : Observer<Boolean> {
-                    override fun onComplete() {}
-
-                    override fun onSubscribe(d: Disposable) {}
-
-                    override fun onNext(t: Boolean) {
-                        if (t) {//granted
-
-                        } else {
-                            //нет разрешение - выводим диалог
-                        }
-                    }
-
-                    override fun onError(e: Throwable) {}
-                })*/
-
+        presenter = providePresenter()
+        router = provideRouter()
+        presenter.attach(router)
     }
 
     override fun onResume() {
@@ -52,34 +34,15 @@ abstract class BaseMainActivity<out Location : BaseLocation> : BaseActivity() {
         request.onStart()
     }
 
-
     override fun onStop() {
         super.onStop()
         request.onStop()
     }
 
-    /**
-     *  Для обработки случая, когда пользователь предоставляет разрешение
-     * */
-    override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray) {
-        if (requestCode == AppConstants.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
-            when (grantResults[0]) {
-                PackageManager.PERMISSION_GRANTED -> {
-                    Log.e("PermissionsResult", "PERMISSION_GRANTED")
-                    request.startLocationUpdates()
-                }
-                PackageManager.PERMISSION_DENIED -> {
-                    Log.e("PermissionsResult", "PERMISSION_DENIED")
-                    Toast.makeText(this@BaseMainActivity, "For correct information, we need to know your current location", Toast.LENGTH_LONG).show()
-                    latitude.text = AppConstants.GREENWICH_DEFOULT_COORDINATES_LATITUDE.toString()
-                    longitude.text = AppConstants.GREENWICH_DEFOULT_COORDINATES_LONGITUDE.toString()
-                }
-            }
-        }
+    @SuppressLint("SetTextI18n")
+    fun applyDefaultCoordinates() {
+        latitude_longtude.setTextColor(Color.GREEN)
+        latitude_longtude.text = android.location.Location.convert(AppConstants.GREENWICH_DEFOULT_COORDINATES_LATITUDE, android.location.Location.FORMAT_SECONDS) + "°с.ш " +
+                android.location.Location.convert(AppConstants.GREENWICH_DEFOULT_COORDINATES_LONGITUDE, android.location.Location.FORMAT_SECONDS) + "°в.д"
     }
-
-
 }

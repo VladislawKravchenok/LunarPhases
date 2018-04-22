@@ -1,0 +1,5 @@
+#От подписи apk
+            storeFile file('../DevKey.jks')
+            storePassword '147963'
+            keyAlias 'keyAlias'
+            keyPassword '147852'
