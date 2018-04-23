@@ -2,6 +2,7 @@ package com.universe.vladiviva5991gmail.moons.mvp.activities.calculations
 
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.SYNODIC_MONTH
 import javax.inject.Singleton
+
 //TODO 1) дописать методы для расчета восхода/захода 2)Дополнить формулы, для более точного расчета
 
 @Singleton
@@ -36,6 +37,17 @@ class MoonPhase {
             //TODO Может быть погрешность в ~1 сутки
             val result = (lunarNumber * 11) - 14 + dayOfMonth + monthInYear
             return result % SYNODIC_MONTH
+        }
+
+        @JvmStatic
+        fun timeConversion(d: Double): String {
+            val days = Math.floor(d).toInt()
+            val rawRestHours = (d - days) * 24
+            val hours = Math.floor(rawRestHours).toInt()
+            val rawRestMinutes = (rawRestHours - hours) * 60
+            val minutes = Math.floor(rawRestMinutes).toInt()
+            val restSeconds = (rawRestMinutes - minutes) * 60
+            return "" + days + "дней" + hours + "ч" + minutes + "м"
         }
     }
 

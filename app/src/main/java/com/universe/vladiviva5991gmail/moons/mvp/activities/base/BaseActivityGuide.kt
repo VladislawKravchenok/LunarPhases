@@ -38,21 +38,19 @@ abstract class BaseActivityGuide : BaseActivity() {
             prefs.edit().putBoolean("firstrun", false).apply()
             informationSigns(
                     info_table,
-                    "Инфо!",
-                    "Нажми в центр, чтобы продолжить",
+                    "Информация о текущем состоянии луны",
                     1)
             Log.e("AAAAA", "firstRun worked, see you in second run xD")
         }
     }
 
-    private fun informationSigns(view: View, title: String, description: String, total: Int) {
+    private fun informationSigns(view: View, title: String,  total: Int) {
         tourGuide = TourGuide.init(this@BaseActivityGuide).with(TourGuide.Technique.CLICK)
                 .setPointer(Pointer())
                 .setToolTip(ToolTip()
                         .setGravity(Gravity.TOP)
                         .setShadow(true)
-                        .setTitle(title)
-                        .setDescription(description))
+                        .setTitle(title))
                 .setOverlay(Overlay()
                         .setBackgroundColor(Color.parseColor("#aa979ea4"))
                         .setOnClickListener {
@@ -60,16 +58,14 @@ abstract class BaseActivityGuide : BaseActivity() {
                             when (total) {
                                 1 -> {
                                     informationSigns(
-                                            toolbar,
-                                            "Кнопка!",
-                                            "Нажми в центр, чтобы продолжить",
+                                            moon_wrapper,
+                                            "Иллюстрация текущего состояния луны",
                                             2)
                                 }
                                 2 -> {
                                     informationSigns(
-                                            previous_day,
-                                            "Ещё одна Кнопка!",
-                                            "Нажми в центр, чтобы продолжить",
+                                            next_day,
+                                            "Переход на сутки вперёд",
                                             3)
                                 }
                                 else -> {

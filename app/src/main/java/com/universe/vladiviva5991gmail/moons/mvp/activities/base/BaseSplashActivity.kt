@@ -2,7 +2,7 @@ package com.universe.vladiviva5991gmail.moons.mvp.activities.base
 
 import android.os.Bundle
 
-abstract class BaseSplashActivity<out Presenter : BasePresenter<Router>>
+abstract class BaseSplashActivity<out Presenter : BasePresenter<BaseView,Router>>
     : BaseActivity() {
 
     private lateinit var presenter: Presenter

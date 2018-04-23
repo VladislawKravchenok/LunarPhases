@@ -44,12 +44,19 @@
         android:background="#aa979ea4"
         app:layout_constraintBottom_toTopOf="@+id/main_lower_menu"
         app:layout_constraintTop_toBottomOf="@+id/app_bar">
-
+        <ProgressBar
+            android:id="@+id/main_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"/>
         <ImageView
             android:id="@+id/moon_phase_representation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#aa979ea4" />
+            android:background="#aa979ea4">
+
+        </ImageView>
     </FrameLayout>
 
     <!--Кнопочки вперёд\назад и текстовая информация о луне-->
@@ -165,4 +172,5 @@
             android:background="@color/colorMainBackground"
             android:src="@drawable/ic_next_day" />
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

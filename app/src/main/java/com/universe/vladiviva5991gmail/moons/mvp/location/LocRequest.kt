@@ -16,11 +16,9 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.universe.vladiviva5991gmail.moons.R
-import com.universe.vladiviva5991gmail.moons.R.color.infoTextColor
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.FASTEST_INTERVAL
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.UPDATE_INTERVAL
-import com.universe.vladiviva5991gmail.moons.mvp.activities.MainActivity
+import com.universe.vladiviva5991gmail.moons.mvp.activities.main.MainActivity
 import com.universe.vladiviva5991gmail.moons.mvp.location.LocationVariables.latitude
 import com.universe.vladiviva5991gmail.moons.mvp.location.LocationVariables.longtude
 import io.reactivex.Observer
