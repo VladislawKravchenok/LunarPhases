@@ -33,10 +33,10 @@ class MoonPhase {
         }
 
         @JvmStatic
-        fun getMoonAge(lunarNumber: Int, dayOfMonth: Int, monthInYear: Int): Float {
+        fun getMoonAge(lunarNumber: Int, dayOfMonth: Int, monthInYear: Int): Double {
             //TODO Может быть погрешность в ~1 сутки
             val result = (lunarNumber * 11) - 14 + dayOfMonth + monthInYear
-            return result % SYNODIC_MONTH
+            return (result % SYNODIC_MONTH) - 0.46941132
         }
 
         @JvmStatic

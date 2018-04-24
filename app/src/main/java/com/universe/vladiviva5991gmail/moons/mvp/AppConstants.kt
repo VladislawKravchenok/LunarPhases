@@ -3,7 +3,7 @@ package com.universe.vladiviva5991gmail.moons.mvp
 
 class AppConstants {
     companion object {
-        const val SYNODIC_MONTH: Float = 29.53058868F
+        const val SYNODIC_MONTH: Int = 30
 
         /**The coordinates specified in the application by default,
          * if the user does not approve the request for his location*/
