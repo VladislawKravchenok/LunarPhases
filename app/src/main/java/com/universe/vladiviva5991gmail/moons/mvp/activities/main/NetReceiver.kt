@@ -6,19 +6,26 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.util.Log
 
-class NetReceiver : BroadcastReceiver() {
+class NetReceiver
+constructor(private val presenter: NetDependent)
+    : BroadcastReceiver() {
+
+    private var isFirst: Boolean = true
+
     override fun onReceive(context: Context?, intent: Intent?) {
-        val connectivityManager
-                = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val netInfo = connectivityManager.activeNetworkInfo
 
         if (netInfo != null && netInfo.type == ConnectivityManager.TYPE_WIFI) {
-            //когда включается сделать запрос и подтянуть данные из рест и сделать пометку в sharedpreference
-            //если запроса ещё не было,
-
-            Log.e("AAAA","wifi-on")
+            Log.e("AAAA", "wifi-on")
+            if (isFirst) {
+                isFirst = false
+            } else {
+                presenter.makeRequest()
+            }
         } else {
-            Log.e("AAAA","wifi-off")
+            presenter.staticColculation()
+            Log.e("AAAA", "wifi-off")
         }
     }
 }

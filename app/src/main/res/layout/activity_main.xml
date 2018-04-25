@@ -30,10 +30,25 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_programm_information" />
+
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
+    <FrameLayout
+        android:id="@+id/layout_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar">
+
+        <TextView
+            android:id="@+id/textview_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/infoTextColor" />
+    </FrameLayout>
     <!--Фаза луны в виде картинки собснай персоной-->
     <FrameLayout
         android:id="@+id/moon_wrapper"
@@ -43,13 +58,15 @@
         android:layout_marginTop="8dp"
         android:background="#aa979ea4"
         app:layout_constraintBottom_toTopOf="@+id/main_lower_menu"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar">
+        app:layout_constraintTop_toBottomOf="@+id/layout_date">
+
         <ProgressBar
             android:id="@+id/main_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
+
         <ImageView
             android:id="@+id/moon_phase_representation"
             android:layout_width="wrap_content"

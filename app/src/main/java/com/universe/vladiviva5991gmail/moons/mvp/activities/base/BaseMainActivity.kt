@@ -5,12 +5,8 @@ import android.content.*
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.os.IBinder
-import android.util.Log
 import android.view.View
 import com.jakewharton.rxbinding2.view.RxView
-import com.universe.vladiviva5991gmail.moons.R.id.latitude_longtude
-import com.universe.vladiviva5991gmail.moons.mvp.AppConstants
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.GREENWICH_DEFOULT_COORDINATES_LATITUDE
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.GREENWICH_DEFOULT_COORDINATES_LONGITUDE
 import com.universe.vladiviva5991gmail.moons.mvp.activities.appInfo.InfoRouter
@@ -18,16 +14,16 @@ import com.universe.vladiviva5991gmail.moons.mvp.activities.main.MainView
 import com.universe.vladiviva5991gmail.moons.mvp.activities.main.NetService
 import com.universe.vladiviva5991gmail.moons.mvp.location.BaseLocation
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.concurrent.TimeUnit
 
 abstract
 class BaseMainActivity
 <out Location : BaseLocation, out Presenter : BasePresenter<MainView, Router>, out R : Router>
-    : BaseActivityGuide(), MainView{
+    : BaseActivityGuide(), MainView {
 
     private lateinit var request: Location
     private lateinit var presenter: Presenter
     private lateinit var router: R
-
 
 
     abstract fun provideLocation(): Location
@@ -45,12 +41,13 @@ class BaseMainActivity
     override fun onStart() {
         super.onStart()
         presenter.onStart()
+        request.onStart()
     }
 
     override fun onResume() {
         super.onResume()
         presenter.onResume()
-        request.onStart()
+
     }
 
     override fun onPause() {
@@ -62,6 +59,7 @@ class BaseMainActivity
         super.onStop()
         presenter.onStop()
         request.onStop()
+
     }
 
     override fun onDestroy() {
@@ -81,7 +79,7 @@ class BaseMainActivity
         main_bar.visibility = View.VISIBLE
     }
 
-    override fun dismissPorgress() {
+    override fun hideProgress() {
         main_bar.visibility = View.INVISIBLE
     }
 
@@ -100,7 +98,7 @@ class BaseMainActivity
     }
 
     override fun onClickInfo() {
-        RxView.clicks(info_view).subscribe {
+        RxView.clicks(info_view).debounce(1,TimeUnit.SECONDS).subscribe {
             InfoRouter(this).navigationToInfo()
         }
     }
@@ -135,4 +133,5 @@ class BaseMainActivity
         unregisterReceiver(receiver)
     }
     //*****Service and broadcast**************END
+
 }

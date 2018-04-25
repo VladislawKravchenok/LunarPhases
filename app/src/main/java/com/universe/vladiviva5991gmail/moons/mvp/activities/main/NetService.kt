@@ -12,15 +12,17 @@ import android.util.Log
 internal class NetService : Service() {
 
     private val binder: IBinder = WifiBinder()
-
-
-
+    private lateinit var wifiManger: WifiManager
     override fun onBind(intent: Intent?): IBinder = binder
 
     override fun unbindService(conn: ServiceConnection?) = super.unbindService(conn)
 
 
+    override fun onCreate() {
+        super.onCreate()
+        wifiManger = this.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
+    }
 
 
     inner class WifiBinder : Binder() {
@@ -29,8 +31,8 @@ internal class NetService : Service() {
 
     //true если включён и false если выключен
     fun getWifiState(): Boolean {
-        Log.e("AAAA","wifi-on")
-        val wifiManger = this.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        Log.e("AAAA", "wifi-stater")
+
         return wifiManger.isWifiEnabled
     }
 

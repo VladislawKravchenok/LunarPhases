@@ -67,12 +67,18 @@ constructor(
         googleApiClient?.connect()//подключается к api клиенту
     }
 
+
     override fun onStart() {
         googleApiClient?.connect()
+        if(googleApiClient!!.isConnecting){
+            Log.e("AAAA","google client is connected!!!")
+        }else{
+            Log.e("AAAA","google client not connected!!!")
+        }
     }
 
     override fun onStop() {
-        if (googleApiClient!!.isConnected) {
+        if (googleApiClient!!.isConnecting) {
             googleApiClient?.disconnect()
         }
     }
@@ -80,9 +86,12 @@ constructor(
     override fun onConnected(p0: Bundle?) {
         if (checkPermission()) return
         startLocationUpdates()
-        location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
-        startLocationUpdates()
-        updateVariables(location)
+        if(googleApiClient!!.isConnecting){
+            location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
+            startLocationUpdates()
+            updateVariables(location)
+        }
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -90,11 +99,15 @@ constructor(
         val msg = "Updated Location: " +
                 (location.latitude).toString() + "," +
                 (location.longitude).toString()
+
         updateVariables(location)
+
         activity.latitude_longtude.setTextColor(Color.GREEN)
+
         activity.latitude_longtude.text =
                 Location.convert(location.latitude, Location.FORMAT_SECONDS) +
                 "°с.ш " + Location.convert(location.longitude, Location.FORMAT_SECONDS) + "°в.д"
+
         Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
     }
 
@@ -116,6 +129,8 @@ constructor(
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,
                     locationRequest, this)
         }
+        activity.hideProgress()
+
     }
 
     private fun requestLocation() {

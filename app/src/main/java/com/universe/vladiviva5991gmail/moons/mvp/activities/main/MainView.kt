@@ -13,12 +13,12 @@ interface MainView : BaseView {
     fun setBound(value: Boolean)
     fun getCalendar(): Calendar
 
-    /**Service command*/
+    /**Service command's*/
     fun onBindService(conn: ServiceConnection)
-
     fun unBindService(conn: ServiceConnection)
     fun registrationReceiver(receiver: BroadcastReceiver)
     fun unregistrationReceiver(receiver: BroadcastReceiver)
+
 
 
 }

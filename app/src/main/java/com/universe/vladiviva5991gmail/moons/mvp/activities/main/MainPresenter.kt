@@ -11,11 +11,13 @@ import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
-
+@Singleton
 class MainPresenter : InterMainPresenter(), NetDependent {
     private var netService: NetService? = null
-    private val receiver: NetReceiver = NetReceiver()
+    private val receiver: NetReceiver = NetReceiver(this)
+
 
     override fun createInject() {
         App.appComponent.inject(this)
@@ -28,14 +30,16 @@ class MainPresenter : InterMainPresenter(), NetDependent {
         super.onStart()
         view.onBindService(this)
     }
+
     //TODO Надо добавить диалог, на случай, если пропадёт интернет,
     //TODO чтобы донести до пользователя, что данные могут быть не точны
     override fun onResume() {
         super.onResume()
         view.registrationReceiver(receiver)
         createInject()
-        view.showProgress()
-        //инициализируем клики
+        startDownloading()
+
+
         onMainClick()
     }
 
@@ -49,9 +53,9 @@ class MainPresenter : InterMainPresenter(), NetDependent {
         view.unBindService(this)
     }
 
-    private fun startDownloading() {
+    override fun startDownloading() {
+        view.showProgress()
         getMoon.get().subscribe(object : Observer<MoonEntity> {
-
             override fun onSubscribe(d: Disposable) {}
             override fun onNext(t: MoonEntity) {
                 Log.e("State moon right now", t.age.toString())
@@ -61,13 +65,17 @@ class MainPresenter : InterMainPresenter(), NetDependent {
                 Log.e("State moon right now", t.dfcoe.toString())
                 view.setupAge(MoonPhase.timeConversion(t.age))
                 view.setupPhase(t.stage)
-
             }
-            override fun onError(e: Throwable) {}
+            override fun onError(e: Throwable) {
+                Log.e("AAAA", "THINK BAD CONNECTION")
+                staticColculation()
+                view.hideProgress()
+            }
             override fun onComplete() {
-                view.dismissPorgress()
+                view.hideProgress()
             }
         })
+
     }
 
     override fun onMainClick() {
@@ -88,27 +96,27 @@ class MainPresenter : InterMainPresenter(), NetDependent {
     }
 
     override fun makeRequest() {
-        if(netService!!.getWifiState()){
+        if (netService!!.getWifiState()) {
             startDownloading()
             Log.e("makeRequest", "Start download")
-        }else{
-            //нет интернета? тогда прибегнем к расчетам на основе алгоритма
-            val calendar = view.getCalendar()
-            val total = MoonPhase.getMoonAge(
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    calendar.get(Calendar.MONTH))
-
-            view.setupAge(MoonPhase.timeConversion(total))
-
-            if(total < 15.0){
-                view.setupPhase("waxing")
-            }else{
-                view.setupPhase("waning")
-            }
-            view.dismissPorgress()
+        } else {
+            staticColculation()
         }
     }
 
+    override fun staticColculation() {
+        val calendar = view.getCalendar()
+        val total = MoonPhase.getMoonAge(
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.MONTH))
+
+        view.setupAge(MoonPhase.timeConversion(total))
+        if (total < 15.0) {
+            view.setupPhase("waxing")
+        } else {
+            view.setupPhase("waning")
+        }
+    }
 
 }

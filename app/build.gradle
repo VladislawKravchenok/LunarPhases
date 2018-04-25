@@ -73,15 +73,9 @@ dependencies {
     implementation projectDependencies.retrofit
     implementation projectDependencies.retrofitConverter
     implementation projectDependencies.retrofit2RxJava2
-
-    /*implementation projectDependencies.archComponentExtention //чекнуть версию в док
-    kapt projectDependencies.archComponentCompiler*/
     kapt projectDependencies.dataBindingCompiler
     implementation projectDependencies.okHttp
     implementation projectDependencies.okHttpLoggining
-    //implementation projectDependencies.room //api
-    //kapt projectDependencies.roomCompiler
-    //implementation projectDependencies.roomRx
     implementation projectDependencies.gmsLocation
     implementation projectDependencies.gmsPlaces
     implementation projectDependencies.constraintLayout
