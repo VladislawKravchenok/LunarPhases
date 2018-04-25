@@ -2,14 +2,11 @@ package com.universe.vladiviva5991gmail.moons.mvp.activities.main
 
 
 import android.app.DatePickerDialog
-import android.icu.text.SimpleDateFormat
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.DatePicker
-import android.widget.Toast
 import com.universe.vladiviva5991gmail.moons.R
 import com.universe.vladiviva5991gmail.moons.mvp.activities.base.BaseMainActivity
 import com.universe.vladiviva5991gmail.moons.mvp.activities.base.BasePresenter
@@ -19,8 +16,9 @@ import com.universe.vladiviva5991gmail.moons.mvp.location.BaseLocation
 import com.universe.vladiviva5991gmail.moons.mvp.location.LocRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import javax.inject.Singleton
 
-
+@Singleton
 class MainActivity
     : BaseMainActivity<BaseLocation, BasePresenter<MainView, Router>, Router>() {
 

@@ -16,8 +16,8 @@ import javax.inject.Singleton
 @Singleton
 class MainPresenter : InterMainPresenter(), NetDependent {
     private var netService: NetService? = null
-    private val receiver: NetReceiver = NetReceiver(this)
-
+    private val netReceiver: NetReceiver = NetReceiver(this)
+    private val gpsReceiver = GpsReceiver()
 
     override fun createInject() {
         App.appComponent.inject(this)
@@ -35,17 +35,17 @@ class MainPresenter : InterMainPresenter(), NetDependent {
     //TODO чтобы донести до пользователя, что данные могут быть не точны
     override fun onResume() {
         super.onResume()
-        view.registrationReceiver(receiver)
+        view.registrationReceiver(netReceiver)
+        view.registrationReceiver(gpsReceiver)
         createInject()
         startDownloading()
-
-
         onMainClick()
     }
 
     override fun onPause() {
         super.onPause()
-        view.unregistrationReceiver(receiver)
+        view.unregistrationReceiver(netReceiver)
+        view.unregistrationReceiver(gpsReceiver)
     }
 
     override fun onStop() {
@@ -66,11 +66,13 @@ class MainPresenter : InterMainPresenter(), NetDependent {
                 view.setupAge(MoonPhase.timeConversion(t.age))
                 view.setupPhase(t.stage)
             }
+
             override fun onError(e: Throwable) {
                 Log.e("AAAA", "THINK BAD CONNECTION")
                 staticColculation()
                 view.hideProgress()
             }
+
             override fun onComplete() {
                 view.hideProgress()
             }

@@ -8,7 +8,9 @@ import android.net.wifi.WifiManager
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
+import javax.inject.Singleton
 
+@Singleton
 internal class NetService : Service() {
 
     private val binder: IBinder = WifiBinder()

@@ -17,7 +17,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -57,7 +56,6 @@ class AppModul constructor(private val context: Context) {
     @Singleton
     fun getOkHttp(): OkHttpClient {
         val builder: OkHttpClient.Builder = OkHttpClient.Builder()
-
         if (BuildConfig.DEBUG) {
             val httpLogging = HttpLoggingInterceptor()
             httpLogging.level = HttpLoggingInterceptor.Level.BODY

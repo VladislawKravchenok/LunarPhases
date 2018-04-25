@@ -12,7 +12,9 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.OnCompleteListener
 import com.universe.vladiviva5991gmail.moons.R
 import com.universe.vladiviva5991gmail.moons.mvp.activities.base.BaseActivity
+import javax.inject.Singleton
 
+@Singleton
 class InfoActivity : BaseActivity() {
 
     private lateinit var fusedLocation: FusedLocationProviderClient

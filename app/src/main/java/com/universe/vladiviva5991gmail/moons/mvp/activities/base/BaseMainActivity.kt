@@ -44,10 +44,10 @@ class BaseMainActivity
         request.onStart()
     }
 
+
     override fun onResume() {
         super.onResume()
         presenter.onResume()
-
     }
 
     override fun onPause() {
@@ -90,15 +90,15 @@ class BaseMainActivity
 
     override fun setupPhase(f: String) {
         if (f == "waxing") {
-            phase.text = "Растущая"
+            phase.text = "Растущая луна"
         } else if (f == "waning") {
-            phase.text = "Стареющая"
+            phase.text = "Стареющая луна"
         }
 
     }
 
     override fun onClickInfo() {
-        RxView.clicks(info_view).debounce(1,TimeUnit.SECONDS).subscribe {
+        RxView.clicks(info_view).debounce(1, TimeUnit.SECONDS).subscribe {
             InfoRouter(this).navigationToInfo()
         }
     }

@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import com.universe.vladiviva5991gmail.moons.R
-import com.universe.vladiviva5991gmail.moons.R.id.action_calendar
 import kotlinx.android.synthetic.main.activity_main.*
 import tourguide.tourguide.Overlay
 import tourguide.tourguide.Pointer

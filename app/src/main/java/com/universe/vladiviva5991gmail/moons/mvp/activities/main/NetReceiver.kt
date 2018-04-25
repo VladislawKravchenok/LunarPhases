@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.util.Log
+import javax.inject.Singleton
 
+@Singleton
 class NetReceiver
 constructor(private val presenter: NetDependent)
     : BroadcastReceiver() {

@@ -16,6 +16,7 @@ build/
 /*/*/build
 build
 /*/*/production
+/local.properties
 *.iml
 *.iws
 *.ipr

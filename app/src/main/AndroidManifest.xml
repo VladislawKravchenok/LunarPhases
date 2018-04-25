@@ -19,7 +19,12 @@
         <service
             android:name=".mvp.activities.main.NetService"
             android:exported="false" />
-
+        <receiver android:name=".mvp.activities.main.GpsReceiver">
+            <intent-filter>
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".mvp.activities.splash.SplashActivity"
             android:screenOrientation="portrait"
