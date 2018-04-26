@@ -9,9 +9,9 @@ import com.universe.vladiviva5991gmail.moons.mvp.activities.main.MainRouter
 import javax.inject.Singleton
 
 @Singleton
-class SplashActivity: BaseSplashActivity<BasePresenter<BaseView,Router>>() {
+class SplashActivity : BaseSplashActivity<BasePresenter<BaseView, Router>>() {
 
-    override fun providePresenter(): BasePresenter<BaseView,Router> = SplashPresenter()
+    override fun providePresenter(): BasePresenter<BaseView, Router> = SplashPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

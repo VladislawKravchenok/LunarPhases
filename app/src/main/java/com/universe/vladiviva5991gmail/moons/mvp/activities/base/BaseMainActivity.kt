@@ -83,19 +83,6 @@ class BaseMainActivity
         main_bar.visibility = View.INVISIBLE
     }
 
-    override fun setupAge(a: String) {
-        age.text = a
-
-    }
-
-    override fun setupPhase(f: String) {
-        if (f == "waxing") {
-            phase.text = "Растущая луна"
-        } else if (f == "waning") {
-            phase.text = "Стареющая луна"
-        }
-
-    }
 
     override fun onClickInfo() {
         RxView.clicks(info_view).debounce(1, TimeUnit.SECONDS).subscribe {
@@ -132,6 +119,51 @@ class BaseMainActivity
     override fun unregistrationReceiver(receiver: BroadcastReceiver) {
         unregisterReceiver(receiver)
     }
-    //*****Service and broadcast**************END
 
+    //*****Service and broadcast**************END
+    override fun setupAge(a: String) {
+        age.text = a
+    }
+
+    override fun setupImage(i: Double) {
+        moon_phase_representation.setImageResource(getMoonIllustration(i))
+    }
+
+    override fun setupPhase(f: String) {
+        if (f == "waxing") {
+            phase.text = "Растущая луна"
+        } else if (f == "waning") {
+            phase.text = "Стареющая луна"
+        }
+
+    }
+
+    private fun getMoonIllustration(i: Double): Int {
+        when (i) {
+            in 0.0..1.4 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_one
+            in 1.5..2.6 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_two
+            in 2.7..3.8 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_three
+            in 3.9..5.0 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_four
+            in 5.1..6.2 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_five
+            in 6.3..7.4 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_six
+            in 7.5..8.6 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_seven
+            in 8.7..9.7 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_eight
+            in 9.8..10.8 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_nine
+            in 10.9..11.9 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_ten
+            in 12.0..13.0 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_eleven
+            in 13.1..14.2 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twelve
+            in 14.3..15.4 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_thirty
+            in 15.5..16.7 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_fourteen
+            in 16.8..18.0 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_fifteen
+            in 18.1..19.4 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_sixteen
+            in 19.5..20.6 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_seventeen
+            in 20.7..21.8 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_eighteen
+            in 21.9..23.0 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_nineteen
+            in 23.1..24.5 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twenty
+            in 24.6..26.0 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twentyone
+            in 26.1..27.4 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twentytwo
+            in 27.5..29.6 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twentythree
+            else -> return 5
+        }
+    }
 }

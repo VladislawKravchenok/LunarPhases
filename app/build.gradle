@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'io.fabric'
+//apply plugin: 'io.fabric'
 def config = rootProject.extensions.getByName("ext")
 repositories {
     mavenCentral()
     maven { url 'https://maven.fabric.io/public' }
-    maven() {url "https://oss.sonatype.org/content/repositories/snapshots"}
+    maven() { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 
 android {
@@ -80,15 +80,13 @@ dependencies {
     implementation projectDependencies.gmsPlaces
     implementation projectDependencies.constraintLayout
     implementation developmentDependencies.leakCanary
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+    /*implementation('com.crashlytics.sdk.android:crashlytics:2.9.one@aar') {
         transitive = true
-    }
+    }*/
     implementation('com.github.worker8:tourguide:1.0.19-SNAPSHOT@aar') {
         transitive = true
     }
 
-
     //test
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

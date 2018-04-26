@@ -3,7 +3,7 @@ package com.universe.vladiviva5991gmail.moons.mvp.activities.calculations
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.SYNODIC_MONTH
 import javax.inject.Singleton
 
-//TODO 1) дописать методы для расчета восхода/захода 2)Дополнить формулы, для более точного расчета
+//TODO one) дописать методы для расчета восхода/захода 2)Дополнить формулы, для более точного расчета
 
 @Singleton
 class MoonPhase {
@@ -34,7 +34,7 @@ class MoonPhase {
 
         @JvmStatic
         fun getMoonAge(lunarNumber: Int, dayOfMonth: Int, monthInYear: Int): Double {
-            //TODO Может быть погрешность в ~1 сутки
+            //TODO Может быть погрешность в ~one сутки
             val result = (lunarNumber * 11) - 14 + dayOfMonth + monthInYear
             return (result % SYNODIC_MONTH) - 0.46941132
         }

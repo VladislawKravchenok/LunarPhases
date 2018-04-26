@@ -65,6 +65,7 @@ class MainPresenter : InterMainPresenter(), NetDependent {
                 Log.e("State moon right now", t.dfcoe.toString())
                 view.setupAge(MoonPhase.timeConversion(t.age))
                 view.setupPhase(t.stage)
+                view.setupImage(t.age)
             }
 
             override fun onError(e: Throwable) {
@@ -114,6 +115,7 @@ class MainPresenter : InterMainPresenter(), NetDependent {
                 calendar.get(Calendar.MONTH))
 
         view.setupAge(MoonPhase.timeConversion(total))
+        view.setupImage(total)
         if (total < 15.0) {
             view.setupPhase("waxing")
         } else {

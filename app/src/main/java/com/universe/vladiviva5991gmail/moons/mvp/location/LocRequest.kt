@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Singleton
 
 /**
- *  1.Доступ к API Google:
+ *  one.Доступ к API Google:
  *  Чтобы установить соединение с API местоположения,
  *  которое предоставляется в библиотеке сервисов Google Play,
  *  нам нужно создать экземпляр GoogleApiCLient .

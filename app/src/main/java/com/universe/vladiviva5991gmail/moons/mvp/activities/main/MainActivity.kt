@@ -2,6 +2,7 @@ package com.universe.vladiviva5991gmail.moons.mvp.activities.main
 
 
 import android.app.DatePickerDialog
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -99,6 +100,7 @@ class MainActivity
         val string: String = DateConverter.engToRus(calendar.time)
         textview_date.text = string
     }
+
 
 
     override fun getCalendar(): Calendar = calendar
