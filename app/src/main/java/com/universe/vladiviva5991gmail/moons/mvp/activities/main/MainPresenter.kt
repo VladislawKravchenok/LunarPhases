@@ -28,6 +28,7 @@ class MainPresenter : InterMainPresenter(), NetDependent {
 
     override fun onStart() {
         super.onStart()
+        view.setupDate()
         view.onBindService(this)
     }
 
@@ -81,10 +82,6 @@ class MainPresenter : InterMainPresenter(), NetDependent {
 
     }
 
-    override fun onMainClick() {
-        view.onClickInfo()
-    }
-
     override fun onServiceDisconnected(name: ComponentName?) {
         view.setBound(false)
     }
@@ -95,9 +92,12 @@ class MainPresenter : InterMainPresenter(), NetDependent {
         netService = binder.getService()
         view.setBound(true)
         makeRequest()
-
     }
 
+    /**
+     * Делаем запрос на получение данных из api, если включен интернет,
+     *      если нет производим статический расчет
+     * */
     override fun makeRequest() {
         if (netService!!.getWifiState()) {
             startDownloading()
@@ -107,15 +107,50 @@ class MainPresenter : InterMainPresenter(), NetDependent {
         }
     }
 
+    /**
+     * Вызывается если нету связи с интернетом, чтобы произвести статический расчет статуса луны
+     *      используя специальные алгоритмы
+     *
+     * @param total получает из метода determinePhase() возраст луны в виде числа с плавающей точкой
+     * */
     override fun staticColculation() {
-        val calendar = view.getCalendar()
-        val total = MoonPhase.getMoonAge(
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.DAY_OF_MONTH),
-                calendar.get(Calendar.MONTH))
-
+        val total = determinePhase()
         view.setupAge(MoonPhase.timeConversion(total))
         view.setupImage(total)
+        phaseTransfer(total)
+    }
+
+    /**
+     * Вызывает из activity когда пользователь выбирает дату в календаре
+     *
+     * @param total получает из метода determinePhase() возраст луны в виде числа с плавающей точкой
+     * */
+    override fun actionWhenChooseDate() {
+        val total = determinePhase()
+        view.setupAge(MoonPhase.timeConversion(total))
+        view.setupImage(total)
+        phaseTransfer(total)
+    }
+
+    /**
+     * Помогает вычислить возраст луны
+     *
+     * @return расчет возраста луны на основе алгоритмов описанны в классе MoonPhase
+     * */
+    private fun determinePhase(): Double {
+        val calendar = view.getCalendar()
+        return MoonPhase.getMoonAge(MoonPhase.getLunarNumber(
+                calendar.get(Calendar.YEAR)),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.MONTH))
+    }
+
+    /**
+     * Устанавливает фазу в зависимости от возраста луны
+     *
+     * @param total содержит возраст луны в виде числа с плавающей точкой
+     * */
+    private fun phaseTransfer(total: Double) {
         if (total < 15.0) {
             view.setupPhase("waxing")
         } else {
@@ -123,4 +158,8 @@ class MainPresenter : InterMainPresenter(), NetDependent {
         }
     }
 
+    override fun onMainClick() {
+        view.onClickInfo()
+
+    }
 }

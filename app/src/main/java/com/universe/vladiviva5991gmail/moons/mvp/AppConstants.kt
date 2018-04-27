@@ -8,7 +8,7 @@ class AppConstants {
         /**The coordinates specified in the application by default,
          * if the user does not approve the request for his location*/
         const val GREENWICH_DEFOULT_COORDINATES_LATITUDE: String = "51:28:36.6672"
-        const val GREENWICH_DEFOULT_COORDINATES_LONGITUDE: String = "-0:0:one.8000"
+        const val GREENWICH_DEFOULT_COORDINATES_LONGITUDE: String = "-0:0:1.8000"
 
         /**Constats for location update in RequestLocation.class*/
         const val UPDATE_INTERVAL = (60 * 1000).toLong()  /* 1 min */

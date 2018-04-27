@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMainBackground">
+    android:background="@color/colorMainBackground"
+    android:orientation="vertical">
     <ScrollView
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/moon_info_border"
@@ -17,5 +19,7 @@
             android:textColor="@color/infoHeaders"
             android:gravity="center_horizontal"
             android:text="О программе"/>
+
+
     </ScrollView>
-</FrameLayout>
+</LinearLayout>

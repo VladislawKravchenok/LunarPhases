@@ -10,10 +10,34 @@
     <string name="expectation">Ожидание сигнала GPS | wifi</string>
 
     <!--InfoAboutMoonActivity-->
+    <string name="moon">Луна́ — естественный спутник Земли</string>
+    <string name="перигей">Перигей</string>
+    <string name="апогей">Апогей</string>
+    <string name="большая_полуось">Большая полуось (a)</string>
+    <string name="сидерический">Сидерический период обращения</string>
+    <string name="синодический">Синодический период обращения</string>
+    <string name="скорость">Орбитальная скорость </string>
+    <string name="наклонение">Наклонение</string>
+    <string name="спутник">Чей спутник</string>
+    <string name="окружность">Окружность большого круга</string>
+    <string name="площадь">Площадь поверхности (S)</string>
+    <string name="объём">Объём (V)</string>
+    <string name="масса">Масса (m)</string>
+
+    <string name="перигейs">356400–370400км</string>
+    <string name="апогейs">404000–406700км</string>
+    <string name="большая_полуосьs">384399 км</string>
+    <string name="сидерическийs">27д7ч43мин11,5сек</string>
+    <string name="синодическийs">29д12ч44,0мин</string>
+    <string name="скоростьs">1,023км/с(средняя)</string>
+    <string name="наклонениеs">5,145°(4,983°–5,317°)отн.эклиптики</string>
+    <string name="спутникs">Земли</string>
+    <string name="окружностьs">10917км</string>
+    <string name="площадьs">3,793·10^7 км²0,074 земной</string>
+    <string name="объёмs">2,1958·10^10 км³0,020 или 1/50 земного</string>
+    <string name="массаs">7,3477·10^22 кг 0,0123 или 1/81 земной</string>
 
     <!--InfoAboutAppActivity-->
-
-
 
 
 </resources>

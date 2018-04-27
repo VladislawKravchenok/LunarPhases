@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Singleton
 
 /**
- *  one.Доступ к API Google:
+ *  1.Доступ к API Google:
  *  Чтобы установить соединение с API местоположения,
  *  которое предоставляется в библиотеке сервисов Google Play,
  *  нам нужно создать экземпляр GoogleApiCLient .
@@ -91,24 +91,15 @@ constructor(
             startLocationUpdates()
             updateVariables(location)
         }
-
     }
 
     @SuppressLint("SetTextI18n")
     override fun onLocationChanged(location: Location) {
-        val msg = "Updated Location: " +
-                (location.latitude).toString() + "," +
-                (location.longitude).toString()
-
         updateVariables(location)
-
         activity.latitude_longtude.setTextColor(Color.GREEN)
-
         activity.latitude_longtude.text =
                 Location.convert(location.latitude, Location.FORMAT_SECONDS) +
                 "°с.ш " + Location.convert(location.longitude, Location.FORMAT_SECONDS) + "°в.д"
-
-        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun updateVariables(location: Location) {
@@ -163,8 +154,10 @@ constructor(
     }
 
     private fun checkLocation(): Boolean {
-        if (!isLocationEnabled())
-            Toast.makeText(activity, "Местоположение не обнаружено.", Toast.LENGTH_SHORT).show()
+        if (!isLocationEnabled()){
+            //Toast.makeText(activity, "Местоположение не обнаружено.", Toast.LENGTH_SHORT).show()
+        }
+
         return isLocationEnabled()
     }
 

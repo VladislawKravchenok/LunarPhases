@@ -14,10 +14,9 @@ import tourguide.tourguide.ToolTip
 import tourguide.tourguide.TourGuide
 
 /**
- * Промежуточное активити показывающее подсказки
+ * Промежуточное активити отвечающее за отображение подсказок
  *
  * Нужен только при первом запуске приложения
- *
  * */
 abstract class BaseActivityGuide : BaseActivity() {
 
@@ -32,18 +31,25 @@ abstract class BaseActivityGuide : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        //TODO Сделать проверку лишь однажды с помощью shared preference
+        firstRunChecker()
+    }
+
+    /**
+     * Проверяет были ли показаны подсказки
+     *
+     * @param prefs содержит закэшированную информацию о каком-то событии
+     * */
+    private fun firstRunChecker(){
         if (prefs.getBoolean("firstrun", true)) {
             prefs.edit().putBoolean("firstrun", false).apply()
             informationSigns(
                     info_table,
                     "Информация о текущем состоянии луны",
                     1)
-            Log.e("AAAAA", "firstRun worked, see you in second run xD")
         }
     }
 
-    private fun informationSigns(view: View, title: String,  total: Int) {
+    private fun informationSigns(view: View, title: String, total: Int) {
         tourGuide = TourGuide.init(this@BaseActivityGuide).with(TourGuide.Technique.CLICK)
                 .setPointer(Pointer())
                 .setToolTip(ToolTip()
@@ -53,26 +59,30 @@ abstract class BaseActivityGuide : BaseActivity() {
                 .setOverlay(Overlay()
                         .setBackgroundColor(Color.parseColor("#aa979ea4"))
                         .setOnClickListener {
-                            tourGuide.cleanUp()
-                            when (total) {
-                                1 -> {
-                                    informationSigns(
-                                            moon_wrapper,
-                                            "Иллюстрация текущего состояния луны",
-                                            2)
-                                }
-                                2 -> {
-                                    informationSigns(
-                                            next_day,
-                                            "Переход на сутки вперёд",
-                                            3)
-                                }
-                                else -> {
-                                    Log.e("ААААА", "Краткий туториал закончен")
-                                }
-                            }
-
+                            startGuide(total)
                         })
                 .playOn(view)
+    }
+
+
+    private fun startGuide(total: Int) {
+        tourGuide.cleanUp()
+        when (total) {
+            1 -> {
+                informationSigns(
+                        moon_wrapper,
+                        "Иллюстрация текущего состояния луны",
+                        2)
+            }
+            2 -> {
+                informationSigns(
+                        next_day,
+                        "Позволяет перейти и увидеть состояние луны на завтра",
+                        3)
+            }
+            else -> {
+                Log.e("ААААА", "Вводный туториал закончен")
+            }
+        }
     }
 }

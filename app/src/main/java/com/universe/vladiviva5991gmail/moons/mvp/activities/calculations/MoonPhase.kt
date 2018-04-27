@@ -4,7 +4,6 @@ import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.SYNODIC_
 import javax.inject.Singleton
 
 //TODO one) дописать методы для расчета восхода/захода 2)Дополнить формулы, для более точного расчета
-
 @Singleton
 class MoonPhase {
 
@@ -36,7 +35,7 @@ class MoonPhase {
         fun getMoonAge(lunarNumber: Int, dayOfMonth: Int, monthInYear: Int): Double {
             //TODO Может быть погрешность в ~one сутки
             val result = (lunarNumber * 11) - 14 + dayOfMonth + monthInYear
-            return (result % SYNODIC_MONTH) - 0.46941132
+            return (result % SYNODIC_MONTH) + 0.53541132
         }
 
         @JvmStatic
@@ -47,7 +46,16 @@ class MoonPhase {
             val rawRestMinutes = (rawRestHours - hours) * 60
             val minutes = Math.floor(rawRestMinutes).toInt()
             val restSeconds = (rawRestMinutes - minutes) * 60
-            return "" + days + "дней" + hours + "ч" + minutes + "м"
+
+            return "" + days + dayConverter(days) + hours + "ч" + minutes + "м"
+        }
+
+        @JvmStatic
+        fun dayConverter(days: Int): String = when (days) {
+            1, 21 -> "день"
+            in 2..4, in 22..24 -> "дня"
+            in 5..20, in 25..30 -> "дней"
+            else -> "дней"
         }
     }
 
