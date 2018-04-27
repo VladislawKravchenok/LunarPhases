@@ -3,4 +3,5 @@
     <color name="colorMainBackground">#263940</color>
     <color name="infoTextColor">#00ff00</color>
     <color name="infoHeaders">#fdee49</color>
+    <color name="textDescription">#e3e5e6</color>
 </resources>

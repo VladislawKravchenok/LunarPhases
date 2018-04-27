@@ -38,6 +38,18 @@
     <string name="массаs">7,3477·10^22 кг 0,0123 или 1/81 земной</string>
 
     <!--InfoAboutAppActivity-->
-
+    <string name="app">Lunar Phases</string>
+    <string name="version">Версия 1.0</string>
+    <string name="права">Все права защищены</string>
+    <string name="имя">Владислав Кравчёнок</string>
+    <string name="благодарности">Благодарности:</string>
+    <string name="lit">Используемая литература:</string>
+    <string name="lits"> Л.Ф. Черниев. Морское судовождение</string>
+    <string name="image">Иллюстрации луны:</string>
+    <string name="images">https://creativemarket.com/</string>
+    <string name="все_права">Все права защищены.
+        \n Разработчик не предоставляет никакой гарантии,
+        \nа так же не несёт никакой ответственности за потери данных,
+        \nповреждения связанные с правильным или неправильным использованием данное программы.</string>
 
 </resources>

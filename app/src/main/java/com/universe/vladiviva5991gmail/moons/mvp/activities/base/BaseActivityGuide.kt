@@ -71,7 +71,7 @@ abstract class BaseActivityGuide : BaseActivity() {
             1 -> {
                 informationSigns(
                         moon_wrapper,
-                        "Иллюстрация текущего состояния луны",
+                        "Иллюстрация текущего состояния луны, нажав на неё можно увидеть описание луны",
                         2)
             }
             2 -> {

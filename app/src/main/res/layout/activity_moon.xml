@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/moon"
-                    android:textColor="#bcccea"
+                    android:textColor="@color/textDescription"
                     android:textSize="17sp" />
 
                 <LinearLayout
@@ -52,7 +52,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/перигей"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -61,7 +61,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/перигейs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -79,7 +79,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/апогей"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -88,7 +88,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/апогейs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -106,7 +106,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/большая_полуось"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -115,7 +115,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/большая_полуосьs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -132,7 +132,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/сидерический"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -141,7 +141,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/сидерическийs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -158,7 +158,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/синодический"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -167,7 +167,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/синодическийs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -184,7 +184,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/скорость"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -193,7 +193,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/скоростьs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -210,7 +210,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/наклонение"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -219,7 +219,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/наклонениеs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -236,7 +236,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/спутник"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -245,7 +245,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/спутникs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -262,7 +262,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/окружность"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -271,7 +271,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/окружностьs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -288,7 +288,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/объём"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -297,7 +297,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/объёмs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -314,7 +314,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/масса"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
 
                         <TextView
@@ -323,7 +323,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/массаs"
-                            android:textColor="#bcccea"
+                            android:textColor="@color/textDescription"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>

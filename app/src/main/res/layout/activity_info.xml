@@ -4,22 +4,87 @@
     android:layout_height="match_parent"
     android:background="@color/colorMainBackground"
     android:orientation="vertical">
-    <ScrollView
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/moon_info_border"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp">
+        android:gravity="center_horizontal"
+        android:text="@string/app"
+        android:textColor="@color/textDescription"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/version"
+        android:textColor="@color/textDescription"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/права"
+        android:textColor="@color/textDescription"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/имя"
+        android:textColor="@color/textDescription"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/благодарности"
+        android:textColor="@color/textDescription"
+        android:textSize="16sp"
+        android:paddingTop="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/lit"
+        android:textColor="@color/infoHeaders"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/lits"
+        android:textColor="@color/infoTextColor"
+        android:textSize="14sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/image"
+        android:textColor="@color/infoHeaders"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/images"
+        android:textColor="@color/infoTextColor"
+        android:textSize="14sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/infoHeaders"
             android:gravity="center_horizontal"
-            android:text="О программе"/>
-
-
-    </ScrollView>
+            android:text="@string/все_права"
+            android:textColor="@color/textDescription"
+            android:textSize="12sp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
 </LinearLayout>
