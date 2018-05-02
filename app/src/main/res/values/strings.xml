@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Moon\'s</string>
+    <string name="app_name">Lunar Phases</string>
 
     <!--MainActivity-->
     <string name="action_settings">Settings</string>
@@ -50,6 +50,6 @@
     <string name="все_права">Все права защищены.
         \n Разработчик не предоставляет никакой гарантии,
         \nа так же не несёт никакой ответственности за потери данных,
-        \nповреждения связанные с правильным или неправильным использованием данное программы.</string>
+        \nповреждения связанные с правильным или неправильным использованием данной программы.</string>
 
 </resources>

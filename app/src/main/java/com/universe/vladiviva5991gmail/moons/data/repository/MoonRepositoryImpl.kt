@@ -10,13 +10,11 @@ class MoonRepositoryImpl
 @Inject
 constructor(val restService: RestService) : MoonRepository{
 
-
     override fun get(): Observable<MoonEntity> {
 
         return restService
                 .loadMoonStatus()
                 .map { MoonEntity(it.age,it.illumination,it.stage,it.dfcoe,it.dfs) }
                 .toObservable()
-
     }
 }

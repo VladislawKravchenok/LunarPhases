@@ -23,7 +23,7 @@ class BaseMainActivity
 <out Location : BaseLocation, Presenter : BasePresenter<MainView, Router>, out R : Router>
     : BaseActivityGuide(), MainView {
 
-    private lateinit var request: Location
+    private var request: Location? = null
     private lateinit var router: R
     protected lateinit var presenter: Presenter
     protected lateinit var datePickerDialog: DatePickerDialog
@@ -32,9 +32,15 @@ class BaseMainActivity
     abstract fun providePresenter(): Presenter
     abstract fun provideRouter(): R
 
+    @SuppressLint("MissingPermission", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        request = provideLocation()
+        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            setLocForLowVersion()
+        } else {
+            request = provideLocation()
+        }
+
         presenter = providePresenter()
         router = provideRouter()
         presenter.attached(this, router)
@@ -43,7 +49,8 @@ class BaseMainActivity
     override fun onStart() {
         super.onStart()
         presenter.onStart()
-        request.onStart()
+
+        request?.onStart()
     }
 
     override fun onResume() {
@@ -59,7 +66,7 @@ class BaseMainActivity
     override fun onStop() {
         super.onStop()
         presenter.onStop()
-        request.onStop()
+        request?.onStop()
 
     }
 
@@ -215,7 +222,7 @@ class BaseMainActivity
         }
         RxView.clicks(moon_phase_representation).debounce(50, TimeUnit.MILLISECONDS).subscribe {
 
-            MoonRouter(this,com.universe.vladiviva5991gmail.moons.R.drawable.phase_thirty).navigateToMoon()
+            MoonRouter(this, com.universe.vladiviva5991gmail.moons.R.drawable.phase_thirty).navigateToMoon()
             overridePendingTransition(com.universe.vladiviva5991gmail.moons.R.anim.anim_in, com.universe.vladiviva5991gmail.moons.R.anim.anim_out)
         }
     }
@@ -224,5 +231,12 @@ class BaseMainActivity
 
     override fun setBound(value: Boolean) {
         bound = value
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setLocForLowVersion() {
+        latitude_longtude.setTextColor(Color.GREEN)
+        latitude_longtude.text = GREENWICH_DEFOULT_COORDINATES_LATITUDE +
+                "°с.ш " + GREENWICH_DEFOULT_COORDINATES_LONGITUDE + "°в.д"
     }
 }

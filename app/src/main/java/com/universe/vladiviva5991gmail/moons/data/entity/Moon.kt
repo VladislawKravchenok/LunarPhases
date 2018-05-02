@@ -11,9 +11,4 @@ data class Moon(
         val dfcoe: Double,
         @SerializedName("DFS")
         val dfs: Double)
-        /*val fm: FM,
-        val nnm: NNM){
-        inner class FM(@SerializedName("DT") val date: Double)//дата и время полной луны
-        inner class NNM(@SerializedName("DT") val date: Double)//дата и время полной луны
-}
-*/
+

@@ -20,26 +20,11 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-// типо метод для рассылки данных, qaToFabric - имя любое
-//releaseNotes - пометки
-//task - создание новой версии
-//gradlew qaToFabric - автоматом заливается на crashlytics
-/*task load(dependsOn: "assembleRelease"){
-    def groupName = "testapp"
-    def releaseNotes = ""
-    def task = tasks.create("crashlyticsUploadDistributionRelease")
-    task.ext.betaDistributionReleaseNotes = releaseNotes
-    task.ext.betaDistributionGroupAliases = groupName
-    task.execute()
-}*/
-
-
 
 allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'https://maven.fabric.io/public' }
     }
 }
 

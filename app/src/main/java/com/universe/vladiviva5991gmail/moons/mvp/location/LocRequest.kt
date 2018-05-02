@@ -155,7 +155,6 @@ constructor(
 
     private fun checkLocation(): Boolean {
         if (!isLocationEnabled()){
-            //Toast.makeText(activity, "Местоположение не обнаружено.", Toast.LENGTH_SHORT).show()
         }
 
         return isLocationEnabled()

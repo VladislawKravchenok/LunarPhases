@@ -15,7 +15,6 @@ class App : Application() {
         super.onCreate()
         initInject()
         initLeakDetection()
-       // Fabric.with(this, Crashlytics())
 
     }
 

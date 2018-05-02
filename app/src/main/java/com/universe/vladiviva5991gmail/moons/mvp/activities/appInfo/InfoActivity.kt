@@ -20,6 +20,4 @@ class InfoActivity : BaseActivity() {
         super.onBackPressed()
         overridePendingTransition(com.universe.vladiviva5991gmail.moons.R.anim.anim_in, com.universe.vladiviva5991gmail.moons.R.anim.anim_out)
     }
-
-
 }

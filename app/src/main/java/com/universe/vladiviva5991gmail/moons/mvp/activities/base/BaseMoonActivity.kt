@@ -15,12 +15,10 @@ abstract class BaseMoonActivity<Presenter : InterMoonPresenter>
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_moon)
         presenter = providePresenter()
-
     }
 
     override fun onResume() {
         super.onResume()
 
     }
-
 }

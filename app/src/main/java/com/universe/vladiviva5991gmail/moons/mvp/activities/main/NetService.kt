@@ -19,13 +19,11 @@ internal class NetService : Service() {
 
     override fun unbindService(conn: ServiceConnection?) = super.unbindService(conn)
 
-
     override fun onCreate() {
         super.onCreate()
         wifiManger = this.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
     }
-
 
     inner class WifiBinder : Binder() {
         fun getService(): NetService = this@NetService
@@ -37,18 +35,4 @@ internal class NetService : Service() {
 
         return wifiManger.isWifiEnabled
     }
-
-    /*private var wifiState: Boolean = false
-    @SuppressLint("MissingPermission")
-       fun wifiSelector() {
-           Log.e("WifiService", "Selector in Action")
-           wifiState = wifiManger.isWifiEnabled
-           if (wifiState) {
-               wifiManger.isWifiEnabled = false
-               wifiState = false
-           } else {
-               wifiManger.isWifiEnabled = true
-               wifiState = true
-           }
-       }*/
 }

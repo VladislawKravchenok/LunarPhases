@@ -10,5 +10,4 @@ class RestService @Inject constructor(private val restApi: RestApi){
     fun loadMoonStatus():Flowable<Moon>{
         return restApi.loadMoonStatus()
     }
-
 }

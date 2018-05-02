@@ -3,20 +3,14 @@ package com.universe.vladiviva5991gmail.moons.mvp.activities.calculations
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.SYNODIC_MONTH
 import javax.inject.Singleton
 
-//TODO one) дописать методы для расчета восхода/захода 2)Дополнить формулы, для более точного расчета
 @Singleton
 class MoonPhase {
-
     companion object {
-
         @JvmStatic
         fun getLunarNumber(year: Int): Int {
-            //TODO UnitTest
             val startPoint = 2000
             var startPointNumber = 6
-
             var result = startPointNumber
-
             if (startPoint == year) {
                 return startPointNumber
             } else if (startPoint < year) {
@@ -24,7 +18,6 @@ class MoonPhase {
             } else if (startPoint > year) {
                 result += startPoint - year
             }
-
             while (result > 19) {
                 result -= 19
             }
@@ -46,7 +39,6 @@ class MoonPhase {
             val rawRestMinutes = (rawRestHours - hours) * 60
             val minutes = Math.floor(rawRestMinutes).toInt()
             val restSeconds = (rawRestMinutes - minutes) * 60
-
             return "" + days + dayConverter(days) + hours + "ч" + minutes + "м"
         }
 
@@ -58,7 +50,5 @@ class MoonPhase {
             else -> "дней"
         }
     }
-
-
 }
 
