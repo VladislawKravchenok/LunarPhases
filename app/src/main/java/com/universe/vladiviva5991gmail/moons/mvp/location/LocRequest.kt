@@ -3,12 +3,14 @@ package com.universe.vladiviva5991gmail.moons.mvp.location
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.common.ConnectionResult
@@ -16,6 +18,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.tbruyelle.rxpermissions2.RxPermissions
+import com.universe.vladiviva5991gmail.moons.R
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.FASTEST_INTERVAL
 import com.universe.vladiviva5991gmail.moons.mvp.AppConstants.Companion.UPDATE_INTERVAL
 import com.universe.vladiviva5991gmail.moons.mvp.activities.main.MainActivity
@@ -70,10 +73,10 @@ constructor(
 
     override fun onStart() {
         googleApiClient?.connect()
-        if(googleApiClient!!.isConnecting){
-            Log.e("AAAA","google client is connected!!!")
-        }else{
-            Log.e("AAAA","google client not connected!!!")
+        if (googleApiClient!!.isConnecting) {
+            Log.e("AAAA", "google client is connected!!!")
+        } else {
+            Log.e("AAAA", "google client not connected!!!")
         }
     }
 
@@ -86,7 +89,7 @@ constructor(
     override fun onConnected(p0: Bundle?) {
         if (checkPermission()) return
         startLocationUpdates()
-        if(googleApiClient!!.isConnecting){
+        if (googleApiClient!!.isConnecting) {
             location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
             startLocationUpdates()
             updateVariables(location)
@@ -137,12 +140,24 @@ constructor(
                             startLocationUpdates()
                         } else {
                             Log.e("requestLocation()", "not granted")
-                            Toast.makeText(activity, "Нет информации о местоположении",
-                                    Toast.LENGTH_LONG).show()
+                            locationOpponents()
                             activity.applyDefaultCoordinates()
                         }
                     }
                 })
+    }
+
+    private fun locationOpponents() {
+        val ad = AlertDialog.Builder(activity)
+        ad.setIcon(R.drawable.ic_yoda)
+        ad.setTitle(R.string.title)
+        ad.setMessage(R.string.not_provide_location)
+        ad.setPositiveButton(R.string.ok, object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                dialog?.cancel()
+            }
+        })
+        ad.show()
     }
 
     private fun checkPermission(): Boolean {
@@ -154,9 +169,8 @@ constructor(
     }
 
     private fun checkLocation(): Boolean {
-        if (!isLocationEnabled()){
+        if (!isLocationEnabled()) {
         }
-
         return isLocationEnabled()
     }
 

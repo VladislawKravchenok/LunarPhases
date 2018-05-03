@@ -18,6 +18,7 @@ class MainPresenter : InterMainPresenter(), NetDependent {
     private var netService: NetService? = null
     private val netReceiver: NetReceiver = NetReceiver(this)
     private val gpsReceiver = GpsReceiver()
+    private var checkOnceLoad: Boolean = true
 
     override fun createInject() {
         App.appComponent.inject(this)
@@ -39,7 +40,10 @@ class MainPresenter : InterMainPresenter(), NetDependent {
         view.registrationReceiver(netReceiver)
         view.registrationReceiver(gpsReceiver)
         createInject()
-        startDownloading()
+        if (checkOnceLoad) {
+            startDownloading()
+            checkOnceLoad = false
+        }
         onMainClick()
     }
 
@@ -67,6 +71,7 @@ class MainPresenter : InterMainPresenter(), NetDependent {
                 view.setupAge(MoonPhase.timeConversion(t.age))
                 view.setupPhase(t.stage)
                 view.setupImage(t.age)
+                view.setupTodayDate()
             }
 
             override fun onError(e: Throwable) {
@@ -79,7 +84,6 @@ class MainPresenter : InterMainPresenter(), NetDependent {
                 view.hideProgress()
             }
         })
-
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {

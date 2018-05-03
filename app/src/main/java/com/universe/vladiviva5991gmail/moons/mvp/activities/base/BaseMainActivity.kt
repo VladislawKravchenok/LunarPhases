@@ -146,7 +146,7 @@ class BaseMainActivity
         if (f == "waxing") {
             phase.text = "Растущая луна"
         } else if (f == "waning") {
-            phase.text = "Стареющая луна"
+            phase.text = "Убывающая луна"
         }
     }
 
@@ -159,28 +159,28 @@ class BaseMainActivity
      * */
     private fun getMoonIllustration(i: Double): Int {
         when (i) {
-            in 0.0..1.4 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_one
-            in 1.5..2.6 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_two
-            in 2.7..3.8 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_three
-            in 3.9..5.0 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_four
-            in 5.1..6.2 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_five
-            in 6.3..7.4 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_six
-            in 7.5..8.6 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_seven
-            in 8.7..9.7 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_eight
-            in 9.8..10.8 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_nine
-            in 10.9..11.9 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_ten
-            in 12.0..13.0 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_eleven
-            in 13.1..14.2 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twelve
-            in 14.3..15.4 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_thirty
-            in 15.5..16.7 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_fourteen
-            in 16.8..18.0 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_fifteen
-            in 18.1..19.4 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_sixteen
-            in 19.5..20.6 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_seventeen
-            in 20.7..21.8 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_eighteen
-            in 21.9..23.0 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_nineteen
-            in 23.1..24.9 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twenty
-            in 25.0..26.7 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twentyone
-            in 26.8..28.3 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twentytwo
+            in 0.0..1.499999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_one
+            in 1.5..2.699999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_two
+            in 2.7..3.899999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_three
+            in 3.9..5.099999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_four
+            in 5.1..6.299999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_five
+            in 6.3..7.499999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_six
+            in 7.5..8.699999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_seven
+            in 8.7..9.799999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_eight
+            in 9.8..10.899999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_nine
+            in 10.9..11.999999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_ten
+            in 12.0..13.099999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_eleven
+            in 13.1..14.299999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twelve
+            in 14.3..15.499999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_thirty
+            in 15.5..16.799999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_fourteen
+            in 16.8..18.099999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_fifteen
+            in 18.1..19.499999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_sixteen
+            in 19.5..20.699999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_seventeen
+            in 20.7..21.899999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_eighteen
+            in 21.9..23.099999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_nineteen
+            in 23.1..24.999999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twenty
+            in 25.0..26.799999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twentyone
+            in 26.8..28.399999999 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twentytwo
             in 28.4..30.0 -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twentythree
             else -> return com.universe.vladiviva5991gmail.moons.R.drawable.phase_twentythree
         }
@@ -221,7 +221,6 @@ class BaseMainActivity
             overridePendingTransition(com.universe.vladiviva5991gmail.moons.R.anim.anim_in, com.universe.vladiviva5991gmail.moons.R.anim.anim_out)
         }
         RxView.clicks(moon_phase_representation).debounce(50, TimeUnit.MILLISECONDS).subscribe {
-
             MoonRouter(this, com.universe.vladiviva5991gmail.moons.R.drawable.phase_thirty).navigateToMoon()
             overridePendingTransition(com.universe.vladiviva5991gmail.moons.R.anim.anim_in, com.universe.vladiviva5991gmail.moons.R.anim.anim_out)
         }

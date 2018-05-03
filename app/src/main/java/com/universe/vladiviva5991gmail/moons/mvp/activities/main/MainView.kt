@@ -13,6 +13,7 @@ interface MainView : BaseView {
     fun onClickInfo()
     fun setBound(value: Boolean)
     fun getCalendar(): Calendar
+    fun setupTodayDate()
 
     /**Service command's*/
     fun onBindService(conn: ServiceConnection)

@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.DatePicker
 import com.jakewharton.rxbinding2.view.RxView
 import com.universe.vladiviva5991gmail.moons.R
+import com.universe.vladiviva5991gmail.moons.R.id.*
 import com.universe.vladiviva5991gmail.moons.mvp.activities.base.BaseMainActivity
 import com.universe.vladiviva5991gmail.moons.mvp.activities.base.BasePresenter
 import com.universe.vladiviva5991gmail.moons.mvp.activities.base.Router
@@ -38,6 +39,7 @@ class MainActivity
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(true)
         initDatePicker()
+       // val message : LocationDialogFragment = LocationDialogFragment().show
     }
 
 
@@ -90,6 +92,10 @@ class MainActivity
         textview_date.text = string
     }
 
+    override fun setupTodayDate() {
+        textview_date.text = DateConverter.engToRus(Date())
+    }
+
     override fun getCalendar(): Calendar = calendar
 
     private fun initDatePicker() {
@@ -120,6 +126,4 @@ class MainActivity
                     setupDate()
                 }
     }
-
-
 }

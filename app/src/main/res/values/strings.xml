@@ -8,6 +8,13 @@
     <string name="moon_age">Возраст:</string>
     <string name="phase">Фаза:</string>
     <string name="expectation">Ожидание сигнала GPS | wifi</string>
+        <!--Диалоговое окно-->
+    <string name="not_provide_location">Не было предоставлено разрешение на определение местоположение
+        устройства,
+        а посему будут использоваться координаты Гринвича по умолчанию.</string>
+    <string name="ok">OK</string>
+    <string name="title">Важное сообщение!</string>
+
 
     <!--InfoAboutMoonActivity-->
     <string name="moon">Луна́ — естественный спутник Земли</string>
